@@ -11,8 +11,15 @@ export default {
           primary: "#4C51B6"
         },
         blue: {
-          primary: "#4C51B6"
-        }
+          primary: "#4C51B6",
+          light: "#808EDD"
+        },
+        mono: {
+          white: "#FFFFFF",
+          light_grey: "#A8A8A8",
+          grey: "#6B6B6B",
+          darkGrey: "#4F4A45",
+        },
       },
       fontFamily: {
         jakarta_sans: ["Plus Jakarta Sans", "sans-serif"],
