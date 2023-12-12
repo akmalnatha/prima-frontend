@@ -1,4 +1,6 @@
 import { FormEventHandler, MouseEventHandler } from "react";
+import { HiOutlineArrowLongRight } from "react-icons/hi2";
+
 
 const Button = ({
   text,
@@ -29,7 +31,7 @@ const Button = ({
       type={type}
       onClick={onClick}
       onSubmit={onSubmit}
-      className={`${size == "large" ? "px-9 py-4 text-4xl" : size == "medium" ? "px-6 py-3" : "px-3 py-2 text-lg"} 
+      className={`${size == "large" ? "px-8 py-3" : size == "medium" ? "px-5 py-2" : "px-3 py-2"} 
       ${
         disable
           ? "bg-mono-grey"
@@ -39,7 +41,7 @@ const Button = ({
       } rounded-full text-[12px] md:text-[16px] font-semibold`}
     >
       {isLoading ? (
-        <div className={`flex items-center justify-center ${size == "large" ? "text-4xl" : size == "medium" ? "text-2xl" : "text-lg"}`}>
+        <div className={`flex items-center justify-center ${size == "large" ? "text-2xl" : size == "medium" ? "text-xl" : "text-lg"}`}>
           <svg
             className="mr-3 h-5 w-5 animate-spin"
             xmlns="http://www.w3.org/2000/svg"
@@ -66,10 +68,11 @@ const Button = ({
         <div
           className={`${
             iconPosition == "right" ? "" : "flex-row-reverse"
-          } flex items-center justify-center gap-2 text-inherit`}
+          } flex items-center justify-center gap-3 ${size == "large" ? "text-2xl" : size == "medium" ? "text-xl" : "text-lg font-normal"}`}
         >
-          <p className={`${size == "large" ? "text-4xl" : size == "medium" ? "text-2xl" : "text-lg"} align-middle`}>{text}</p>
+          {text}
           {icon && (
+            size == "large" ?
             <img
               src={
                 color == "primary"
@@ -79,7 +82,12 @@ const Button = ({
                   : "assets/button_arrow_black.svg"
               }
               alt="arrow"
+              className={`${size == "large" && "py-2 px-4 border-2 border-white"} rounded-full`}
             />
+            :
+            <div className={`${color == "primary" ? "border-2 border-white rounded-full px-1 py-1" : ""} shrink-0`}>
+                <HiOutlineArrowLongRight/> 
+            </div>
           )}
         </div>
       )}
@@ -88,3 +96,6 @@ const Button = ({
 };
 
 export default Button;
+
+// {icon && (
+//   )}

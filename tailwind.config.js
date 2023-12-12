@@ -16,8 +16,9 @@ export default {
         },
         mono: {
           white: "#FFFFFF",
-          light_grey: "#A8A8A8",
-          grey: "#6B6B6B",
+          off_white: "#E8E8E9",
+          light_grey: "#C4CDD5",
+          grey: "#919EAB",
           darkGrey: "#4F4A45",
         },
       },
