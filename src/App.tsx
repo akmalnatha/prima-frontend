@@ -2,19 +2,39 @@ import { useState } from "react";
 import "./App.css";
 import Paginate from "./components/paginate";
 import Navbar from "./components/navbar";
+import {
+  Route,
+  RouterProvider,
+  Routes,
+  createBrowserRouter,
+} from "react-router-dom";
+import Home from "./pages/Home/page";
+import Virtual from "./pages/Virtual/page";
+import Arsip from "./pages/Arsip/page";
+import About from "./pages/Aboutus/page";
 
-function App() {
-  const [currentPage, setCurrentPage] = useState(1);
+const router = createBrowserRouter([{ path: "*", Component: Root }]);
 
+export default function App() {
+  return <RouterProvider router={router} />;
+}
+
+function Root() {
   return (
-    <>
-      {/* <Paginate
-        current={(currentPage) => setCurrentPage(currentPage)}
-        totalPages={10}
-      /> */}
-      <Navbar idx={0}/>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/virtual" element={<Virtual />} />
+      <Route path="/arsip" element={<Arsip />} />
+      <Route path="/aboutus" element={<About />} />
+      <Route path="*" element={<Dummy title={"Not Found"} />} />
+    </Routes>
   );
 }
 
-export default App;
+function Dummy({ title }: { title: string }) {
+  return (
+    <div className="min-h-screen w-full flex justify-center items-center">
+      {title}
+    </div>
+  );
+}
