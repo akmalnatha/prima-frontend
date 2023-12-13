@@ -1,7 +1,4 @@
-import { useState } from "react";
 import "./App.css";
-import Paginate from "./components/paginate";
-import Navbar from "./components/navbar";
 import {
   Route,
   RouterProvider,
