@@ -1,6 +1,3 @@
-import { useEffect, useRef, useState } from "react";
-import { AiOutlineSearch } from "react-icons/ai";
-
 const SearchBar = ({
   placeholder,
   value,
@@ -18,38 +15,6 @@ const SearchBar = ({
   labelStyle?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement> | undefined;
 }) => {
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  const [containerHeight, setContainerHeight] = useState<number>(0);
-  useEffect(() => {
-    const updateContainerSize = () => {
-      if (mapContainerRef.current) {
-        setContainerHeight(mapContainerRef.current.offsetHeight);
-      }
-    };
-
-    // Initial setup
-    updateContainerSize();
-
-    // Event listener for window resize
-    window.addEventListener("resize", updateContainerSize);
-
-    // Cleanup the event listener on component unmount
-    return () => {
-      window.removeEventListener("resize", updateContainerSize);
-    };
-  }, []);
-  //password attribute
-  //   const [showPassword, setShowPassword] = useState("password");
-  //   const [icon, setIcon] = useState(<AiFillEyeInvisible></AiFillEyeInvisible>);
-  //   const handleToggle = () => {
-  //     if (showPassword === "password") {
-  //       setIcon(<AiFillEye></AiFillEye>);
-  //       setShowPassword("text");
-  //     } else {
-  //       setIcon(<AiFillEyeInvisible></AiFillEyeInvisible>);
-  //       setShowPassword("password");
-  //     }
-  //   };
 
   return (
     <>
