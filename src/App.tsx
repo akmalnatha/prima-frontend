@@ -9,6 +9,8 @@ import Home from "./pages/Home/page";
 import Virtual from "./pages/Virtual/page";
 import Arsip from "./pages/Arsip/page";
 import About from "./pages/Aboutus/page";
+import Exhibitors from "./pages/Exhibitors/page";
+import PosterDetail from "./pages/PosterDetail/page";
 
 const router = createBrowserRouter([{ path: "*", Component: Root }]);
 
@@ -23,6 +25,8 @@ function Root() {
       <Route path="/virtual" element={<Virtual />} />
       <Route path="/arsip" element={<Arsip />} />
       <Route path="/aboutus" element={<About />} />
+      <Route path="/exhibitors" element={<Exhibitors />} />
+      <Route path="/detail" element={<PosterDetail />} />
       <Route path="*" element={<Dummy title={"Not Found"} />} />
     </Routes>
   );
