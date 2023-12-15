@@ -1,6 +1,7 @@
 import { MouseEventHandler } from "react";
 import { BiLike } from "react-icons/bi";
 import Button from "./button";
+import "./card.css"
 
 const Card = ({
   tipe = "most liked",
@@ -21,7 +22,7 @@ const Card = ({
     <>
       {tipe == "most liked" && (
         <div
-          className="w-full max-w-[568px] h-fit bg-white hover:bg-mono-light_grey rounded-[25px] shadow-md pb-4 cursor-pointer"
+          className="w-full max-w-[568px] h-full bg-white hover:bg-mono-light_grey rounded-[25px] card-shadow pb-4 cursor-pointer"
           onClick={onClick}
         >
           <div className="w-full h-fit flex flex-col items-center justify-between gap-4">
@@ -45,7 +46,7 @@ const Card = ({
       )}
       {tipe == "exhibitors" && (
         <div
-          className="w-full max-w-[440px] h-fit bg-white hover:bg-mono-light_grey rounded-[25px] shadow-md pb-6 cursor-pointer"
+          className="w-full max-w-[440px] h-full bg-white hover:bg-mono-light_grey rounded-[25px] card-shadow pb-6 cursor-pointer"
           onClick={onClick}
         >
           <div className="w-full h-fit flex flex-col items-center justify-between gap-4">
@@ -64,6 +65,23 @@ const Card = ({
                 <p className="text-xs">{likes} Likes</p>
               </div>
             </div>
+          </div>
+        </div>
+      )}
+      {tipe == "posters" && (
+        <div
+          className="w-full max-w-[440px] h-full bg-white hover:bg-mono-light_grey rounded-[25px] card-shadow cursor-pointer"
+          onClick={onClick}
+        >
+          <div className="w-full h-fit flex flex-col p-4 pb-6 items-center justify-between gap-4">
+            <img
+              src={link != undefined ? link : "/assets/image_not_found.png"}
+              alt="Card picture"
+              className="w-full h-[670px] object-cover"
+            />
+            <p className="font-medium text-xl text-center w-full">
+              {nama}
+            </p>
           </div>
         </div>
       )}
