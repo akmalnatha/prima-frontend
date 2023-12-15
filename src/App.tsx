@@ -11,6 +11,7 @@ import Arsip from "./pages/Arsip/page";
 import About from "./pages/Aboutus/page";
 import Exhibitors from "./pages/Exhibitors/page";
 import PosterDetail from "./pages/PosterDetail/page";
+import ExhibitorsPosters from "./pages/ExhibitorsPosters/page";
 
 const router = createBrowserRouter([{ path: "*", Component: Root }]);
 
@@ -26,6 +27,7 @@ function Root() {
       <Route path="/arsip" element={<Arsip />} />
       <Route path="/aboutus" element={<About />} />
       <Route path="/exhibitors" element={<Exhibitors />} />
+      <Route path="/exhibitors-posters" element={<ExhibitorsPosters />} />
       <Route path="/detail" element={<PosterDetail />} />
       <Route path="*" element={<Dummy title={"Not Found"} />} />
     </Routes>
