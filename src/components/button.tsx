@@ -13,6 +13,7 @@ const Button = ({
   iconPosition = "right",
   size = "large",
   disable = false,
+  fitContent = true
 }: {
   text?: string;
   type: "button" | "submit" | "reset" | undefined;
@@ -24,6 +25,7 @@ const Button = ({
   iconPosition?: "right" | "left";
   size?: "large" | "medium" | "small";
   disable?: boolean;
+  fitContent?: boolean;
 }) => {
   return (
     <button
@@ -36,12 +38,12 @@ const Button = ({
         disable
           ? "bg-mono-grey"
           : color == "primary"
-          ? "bg-gradient-to-b from-blue-primary to-blue-light active:from-[#3F44B5] active:to-blue-light hover:from-[#5257B2] hover:to-blue-light text-white"
+          ? "bg-gradient-to-b from-blue-primary to-blue-light active:from-blue-primary active:to-blue-primary hover:from-purple-primary hover:to-blue-light text-white"
           : "bg-white border-2 border-black group hover:border-blue-primary active:border-indigo-700 text-black hover:text-blue-primary"
-      } rounded-full text-[12px] md:text-[16px] font-semibold`}
+      } rounded-full text-[12px] md:text-[16px] font-semibold ${fitContent ? "w-fit" : "w-full"} `}
     >
       {isLoading ? (
-        <div className={`flex items-center justify-center ${size == "large" ? "text-2xl" : size == "medium" ? "text-xl" : "text-lg"}`}>
+        <div className={`flex items-center justify-center ${size == "large" ? "text-sm md:text-2xl" : size == "medium" ? "text-xl" : "text-lg"}`}>
           <svg
             className="mr-3 h-5 w-5 animate-spin"
             xmlns="http://www.w3.org/2000/svg"
@@ -68,11 +70,11 @@ const Button = ({
         <div
           className={`${
             iconPosition == "right" ? "" : "flex-row-reverse"
-          } flex items-center justify-center gap-3 ${size == "large" ? "text-2xl" : size == "medium" ? "text-xl" : "text-lg font-normal"}`}
+          } flex items-center justify-center gap-3 ${size == "large" ? "text-sm md:text-2xl" : size == "medium" ? "text-xl" : "text-lg font-normal"}`}
         >
           {text}
           {icon && (
-            size == "large" ?
+            size == "large" || size == "medium" ?
             <img
               src={
                 color == "primary"

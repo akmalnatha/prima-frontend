@@ -1,11 +1,30 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 
 function Navbar({ idx }: { idx: number }) {
   const [navOpen, setNavOpen] = useState(false);
+  const [stickyClass, setStickyClass] = useState("absolute bg-transparent");
+
+  const stickNavbar = () => {
+    const header = document.querySelector("nav");
+    if (header != null) {
+      window.scrollY > header.offsetTop
+        ? setStickyClass("fixed bg-slate-100 bg-opacity-70 backdrop-blur-sm")
+        : setStickyClass("absolute bg-transparent");
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", stickNavbar);
+
+    return () => {
+      window.removeEventListener("scroll", stickNavbar);
+    };
+  }, []);
+  
   return (
     <>
-      <div className="fixed z-50 flex h-[160px] bg-transparent w-full items-center justify-between px-10">
+      <nav className={`${stickyClass} z-50 flex h-20 lg:h-auto w-full items-center justify-between px-7 lg:pt-7 lg:pb-4 transition delay-100 ease-in-out`}>
         <button
           type="button"
           className={`${
@@ -108,7 +127,7 @@ function Navbar({ idx }: { idx: number }) {
           alt=""
           className="w-32 h-16 hidden lg:block"
         />
-      </div>
+      </nav>
     </>
   );
 }
