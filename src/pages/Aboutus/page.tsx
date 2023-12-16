@@ -5,7 +5,10 @@ export default function About() {
   return (
     <>
       <Navbar idx={3} />
-      <div className="w-full h-full flex flex-col px-10 lg:px-28 mb-[100px] lg:mb-[200px]">
+      <div className="max-w-screen w-full h-full flex flex-col px-10 lg:px-28 mb-[100px] md:mb-[200px] overflow-hidden">
+          <img src="/assets/radial.svg" alt="" className="absolute top-[-88px] left-[-26px]" />
+          <img src="/assets/radial1.svg" alt="" className="absolute top-[-5%] right-0" />
+          <img src="/assets/aboutspiral.svg" alt="" className="absolute top-[70%] md:top-[50%] lg:top-[20%] left-[-4px]" />
         <p className="mt-[96px] lg:mt-[160px] font-bold text-[28px] lg:text-[56px] text-center lg:text-start">About Us</p>
         <p className="mt-10 font-medium text-[16px] lg:text-[24px] text-justify">
           PRIMA 2022 adalah singkatan dari Pameran Riset, Inovasi dan Pengabdian
