@@ -25,12 +25,12 @@ function Root() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/virtual" element={<Virtual />} />
-      <Route path="/non-virtual" element={<NonVirtual />} />
-      <Route path="/arsip" element={<Arsip />} />
+      <Route path="/non-virtual/:year" element={<NonVirtual />} />
+      {/* <Route path="/arsip/:year" element={<Arsip />} /> */}
       <Route path="/aboutus" element={<About />} />
-      <Route path="/exhibitors" element={<Exhibitors />} />
-      <Route path="/exhibitors-posters" element={<ExhibitorsPosters />} />
-      <Route path="/detail" element={<PosterDetail />} />
+      <Route path="/exhibitors/:year" element={<Exhibitors />} />
+      <Route path="/exhibitors-posters/:id" element={<ExhibitorsPosters />} />
+      <Route path="/detail/:id" element={<PosterDetail />} />
       <Route path="*" element={<Dummy title={"Not Found"} />} />
     </Routes>
   );

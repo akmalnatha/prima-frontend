@@ -1,14 +1,13 @@
-import { useState } from "react";
+import { useNavigate } from "react-router";
 import Button from "../../components/button";
 import Card from "../../components/card";
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
-import Paginate from "../../components/paginate";
 import SearchBar from "../../components/searchbar";
 import LayoutAuth from "../../layout/LayoutAuth";
 
 export default function NonVirtual() {
-  const [current, setCurrent] = useState(1);
+  const navigate = useNavigate();
   return (
     <>
       <LayoutAuth title={"Prima ITB 2023"} needAuth={true}>
@@ -39,6 +38,7 @@ export default function NonVirtual() {
               iconPosition="right"
               size="large"
               text="View Exhibitors"
+              onClick={() => navigate('/exhibitors/2023')}
             />
           </div>
           <div className="mt-10 lg:mt-16 w-full flex justify-center lg:justify-end">

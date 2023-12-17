@@ -6,8 +6,10 @@ import Navbar from "../../components/navbar";
 import Paginate from "../../components/paginate";
 import SearchBar from "../../components/searchbar";
 import LayoutAuth from "../../layout/LayoutAuth";
+import { useNavigate } from "react-router";
 
 export default function Exhibitors() {
+  const navigate = useNavigate();
   const [current, setCurrent] = useState(1);
   return (
     <>
@@ -53,6 +55,7 @@ export default function Exhibitors() {
                 text="Back to Exhibitor Gallery"
                 color="secondary"
                 size="medium"
+                onClick={() => navigate("/non-virtual/2023")}
               />
             </div>
             <div className="w-full lg:w-1/2">

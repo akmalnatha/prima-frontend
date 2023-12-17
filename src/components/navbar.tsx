@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { IoChevronDownOutline } from "react-icons/io5";
 
 function Navbar({ idx }: { idx: number }) {
   const [navOpen, setNavOpen] = useState(false);
   const [stickyClass, setStickyClass] = useState("absolute bg-transparent");
+  const [arsip, setArsip] = useState<boolean>(false);
 
   const stickNavbar = () => {
     const header = document.querySelector("nav");
@@ -21,10 +23,12 @@ function Navbar({ idx }: { idx: number }) {
       window.removeEventListener("scroll", stickNavbar);
     };
   }, []);
-  
+
   return (
     <>
-      <nav className={`${stickyClass} z-50 flex h-20 lg:h-auto w-full items-center justify-between px-7 lg:pt-7 lg:pb-4 transition delay-100 ease-in-out`}>
+      <nav
+        className={`${stickyClass} z-50 flex h-20 lg:h-auto w-full items-center justify-between px-7 lg:pt-7 lg:pb-4 transition delay-100 ease-in-out`}
+      >
         <button
           type="button"
           className={`${
@@ -90,14 +94,30 @@ function Navbar({ idx }: { idx: number }) {
               >
                 3D Virtual Gallery 2022
               </NavLink>
-              <NavLink
-                to="/arsip"
+              <div
+                onClick={() => setArsip(!arsip)}
                 className={`${
                   idx == 2 ? "font-bold" : "font-medium"
-                } text-[16px] md:text-[20px] font-bold hover:font-bold`}
+                } text-[16px] md:text-[20px] flex items-center cursor-pointer`}
               >
-                Arsip
-              </NavLink>
+                <p className="hover:font-bold">Arsip </p>
+                <span>
+                  <IoChevronDownOutline />
+                </span>
+                {arsip && (
+                  <div
+                    id="dropdown"
+                    className="absolute flex w-fit mt-40 flex-col bg-white shadow-lg bg-opacity-75 rounded-xl"
+                  >
+                    <NavLink className="py-4 px-6 text-[16px] md:text-[20px] font-normal hover:font-bold hover:bg-gray-300 rounded-t-xl" to={"/arsip"}>
+                      Gallery 2022
+                    </NavLink>
+                    <NavLink className="py-4 px-6 text-[16px] md:text-[20px] font-normal hover:font-bold hover:bg-gray-300 rounded-b-xl" to={"/arsip"}>
+                      Gallery 2021
+                    </NavLink>
+                  </div>
+                )}
+              </div>
               <NavLink
                 to="/aboutus"
                 className={`${
