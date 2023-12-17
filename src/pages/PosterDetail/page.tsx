@@ -8,7 +8,7 @@ export default function PosterDetail() {
   return (
     <>
       <Navbar idx={5} />
-      <div className="w-full h-full flex flex-col px-10 lg:px-24 mb-[100px] lg:mb-[120px]">
+      <div className="w-full h-full flex flex-col px-10 lg:px-24 mb-[100px] lg:mb-[180px] xl:mb-[900px]">
         <p className="mt-[96px] lg:mt-[160px] font-semibold text-[16px] lg:text-[36px] text-center">
           Pengembangan Teknologi Material Bioaspal - Sebagai Bahan Peremaja
           untuk Material Daur Ulang Perkerasan Jalan Lentur - Part 2
@@ -34,8 +34,8 @@ export default function PosterDetail() {
           />
         </div>
         <div className="mt-12 w-full h-[1000px] pl-14">
-            <div className="w-full h-full border-[6px] border-[#3F4283]">
-                <img src="/assets/poster1.svg" alt="" className="w-[2000px] h-[1000px] -translate-x-14 translate-y-10" />
+            <div className="w-fit h-fit border-[6px] border-[#3F4283]">
+                <img src="/assets/poster1.svg" alt="" className=" -translate-x-14 translate-y-10" />
             </div>
         </div>
       </div>

@@ -11,18 +11,23 @@ export default function Exhibitors() {
   return (
     <>
       <Navbar idx={5} />
+        <div className="w-96 h-full absolute top-[-100px] right-[-12px] z-0 bg-[url('/assets/spiralexhibitors2.svg')] bg-cover" />
       <div className="w-full h-full flex flex-col px-10 lg:px-24 mb-[100px] lg:mb-[120px]">
-        <p className="mt-[96px] lg:mt-[160px] font-bold text-[28px] lg:text-[60px] text-center">
+        <img src="/assets/radial.svg" alt="" className="absolute top-[-10px] left-[-100px]" />
+        <img src="/assets/spiralexhibitors.svg" alt="" className="absolute -top-[200px] -left-[10px] z-0" />
+        <img src="/assets/spiralexhibitors3.svg" alt="" className="absolute top-[800px] -left-[0px] z-0" />
+        <img src="/assets/radial.svg" alt="" className="absolute top-[1500px] left-[-100px]" />
+        <p className="mt-[96px] lg:mt-[160px] font-bold text-[28px] lg:text-[60px] text-center z-50">
           PRIMA ITB 2023
         </p>
         <p className="mt-3 font-bold text-[28px] lg:text-[60px] text-center bg-gradient-to-b from-[#275791] to-[#0B25BE] bg-clip-text text-transparent">
           Exhibitors
         </p>
-        <p className="mt-3 font-medium text-[10px] lg:text-[28px] text-center">
+        <p className="mt-3 font-medium text-[10px] lg:text-[28px] text-center z-50">
           Pameran Riset, Inovasi, dan Pengabdian Masyarakat (Virtual)
         </p>
         <div className="mt-10 lg:mt-16 w-full flex justify-center lg:justify-between items-center">
-          <div className="hidden lg:block">
+          <div className="hidden lg:block z-50">
             <Button
             type={"button"}
             icon={true}
@@ -36,13 +41,13 @@ export default function Exhibitors() {
             <SearchBar placeholder={"Search ..."} />
           </div>
         </div>
-        <div className="mt-10 lg:mt-14 w-full grid justify-items-center grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14">
+        <div className="z-50 mt-10 lg:mt-14 w-full grid justify-items-center grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14">
             <Card tipe={"exhibitors"} nama={"Lembaga Pengembangan Inovasi dan Kewirausahaan ITB (LPIK-ITB)"}/>
             <Card tipe={"exhibitors"} nama={"Lembaga Pengembangan Inovasi dan Kewirausahaan ITB (LPIK-ITB)"}/>
             <Card tipe={"exhibitors"} nama={"Lembaga Pengembangan Inovasi dan Kewirausahaan ITB (LPIK-ITB)"}/>
             <Card tipe={"exhibitors"} nama={"Lembaga Pengembangan Inovasi dan Kewirausahaan ITB (LPIK-ITB)"}/>
         </div>
-        <div className="mt-4 w-full flex justify-center">
+        <div className="mt-4 w-full flex justify-center z-50">
             <Paginate totalPages={10} current={(e) => setCurrent(e)}/>
         </div>
       </div>
