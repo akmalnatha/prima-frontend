@@ -2,6 +2,7 @@ import { MouseEventHandler, useState } from "react";
 import { BiLike, BiSolidLike } from "react-icons/bi";
 import Button from "./button";
 import "./card.css"
+import { likeDepartments } from "../api/api";
 
 const Card = ({
   tipe = "most liked",
@@ -10,7 +11,7 @@ const Card = ({
   likes = 0,
   link,
   onClick,
-  onClickLike,
+  id,
   liked
 }: {
   tipe: "exhibitors" | "most liked" | "posters";
@@ -19,13 +20,14 @@ const Card = ({
   likes?: number;
   link?: string;
   onClick?: MouseEventHandler<HTMLDivElement> | undefined;
-  onClickLike?: MouseEventHandler<HTMLDivElement> | undefined;
+  id: string;
   liked?: boolean
 }) => {
   const [likedPost, setLikedPost] = useState<boolean>(liked ? liked : false);
   const [totalLikes, setTotalLikes] = useState<number>(likes);
   function handleLikePost() {
-    onClickLike;
+    setLikedPost(!likedPost);
+    likeDepartments(!likedPost, id);
     if(likedPost){
       setTotalLikes(totalLikes-1);
     } else {

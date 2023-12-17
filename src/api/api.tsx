@@ -28,7 +28,7 @@ export const getDepartments = async () => {
   }
 };
 
-export const getDepartmentByID = async (id: number, offset=0) => {
+export const getDepartmentByID = async (id: string, offset=0) => {
   try {
     const hasil = await axios({
       method: "GET",
@@ -91,7 +91,7 @@ export const getAllResearch = async (s = '', offset = 0) => {
   }
 }
 
-export const getResearchByID = async (id: number) => {
+export const getResearchByID = async (id: string) => {
   try {
     const hasil = await axios({
       method: "GET",
@@ -117,7 +117,7 @@ export const getMostLiked = async () => {
   }
 };
 
-export const likeDepartments = async (like: any, id: number) => {
+export const likeDepartments = async (like: any, id: string) => {
   try {
     const da = {
       like: like,
@@ -133,7 +133,7 @@ export const likeDepartments = async (like: any, id: number) => {
   }
 };
 
-export const likeResearches = async (like: any, id: number) => {
+export const likeResearches = async (like: any, id: string) => {
   try {
     const da = {
       like: like,

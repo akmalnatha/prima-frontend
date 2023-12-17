@@ -27,7 +27,7 @@ function Paginate({
     pageNumbers.push(
       <li
         key={i}
-        className={`cursor-pointer px-3 py-1 rounded-md font-bold ${
+        className={`cursor-pointer px-3 py-1 rounded-md font-bold bg-white ${
           currentPage === i
             ? "border-2 border-blue-primary text-blue-primary"
             : "border-2 border-[#DFE3E8] hover:bg-blue-primary hover:text-white"
@@ -53,7 +53,7 @@ function Paginate({
             pushPage(pageNumbers, i);
           } else if (i == currentPage + 3) {
             pageNumbers.push(
-              <li className="px-3 py-1 rounded-md border-2 border-[#DFE3E8] hover:bg-blue-primary hover:text-white font-bold">
+              <li className="bg-white px-3 py-1 rounded-md border-2 border-[#DFE3E8] hover:bg-blue-primary hover:text-white font-bold">
                 ...
               </li>
             );
@@ -63,7 +63,7 @@ function Paginate({
             pushPage(pageNumbers, i);
           } else if (i == totalPages - 4) {
             pageNumbers.push(
-              <li className="px-3 py-1 rounded-md border-2 border-[#DFE3E8] hover:bg-blue-primary hover:text-white font-bold">
+              <li className="bg-white px-3 py-1 rounded-md border-2 border-[#DFE3E8] hover:bg-blue-primary hover:text-white font-bold">
                 ...
               </li>
             );

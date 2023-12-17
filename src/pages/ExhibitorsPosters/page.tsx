@@ -39,10 +39,10 @@ export default function ExhibitorsPosters() {
             </div>
           </div>
           <div className="mt-10 lg:mt-14 w-full grid justify-items-center grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14">
-              <Card tipe={"posters"} nama={"Lembaga Pengembangan Inovasi dan Kewirausahaan ITB (LPIK-ITB)"} link="/poster_placeholder.svg"/>
-              <Card tipe={"posters"} nama={"Lembaga Pengembangan"} link="/poster_placeholder.svg"/>
-              <Card tipe={"posters"} nama={"Lembaga Pengembangan Inovasi dan Kewirausahaan ITB (LPIK-ITB)"} link="/poster_placeholder.svg"/>
-              <Card tipe={"posters"} nama={"Lembaga Pengembangan Inovasi dan Kewirausahaan ITB (LPIK-ITB)"} link="/poster_placeholder.svg"/>
+              <Card tipe={"posters"} nama={"Lembaga Pengembangan Inovasi dan Kewirausahaan ITB (LPIK-ITB)"} link="/poster_placeholder.svg" id={""}/>
+              <Card tipe={"posters"} nama={"Lembaga Pengembangan"} link="/poster_placeholder.svg" id={""}/>
+              <Card tipe={"posters"} nama={"Lembaga Pengembangan Inovasi dan Kewirausahaan ITB (LPIK-ITB)"} link="/poster_placeholder.svg" id={""}/>
+              <Card tipe={"posters"} nama={"Lembaga Pengembangan Inovasi dan Kewirausahaan ITB (LPIK-ITB)"} link="/poster_placeholder.svg" id={""}/>
           </div>
           <div className="mt-4 w-full flex justify-center">
               <Paginate totalPages={10} current={(e) => setCurrent(e)}/>

@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import Home from "./pages/Home/page";
 import Virtual from "./pages/Virtual/page";
-import Arsip from "./pages/Arsip/page";
+// import Arsip from "./pages/Arsip/page";
 import About from "./pages/Aboutus/page";
 import Exhibitors from "./pages/Exhibitors/page";
 import PosterDetail from "./pages/PosterDetail/page";
