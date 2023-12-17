@@ -1,8 +1,8 @@
 function Footer() {
   return (
     <>
-      <footer className="bottom-0 w-full bg-gradient-to-b from-blue-primary to-[#3083D5] rounded-t-3xl pt-12 pb-12 px-8 lg:px-20 z-10">
-        <div className="w-full flex flex-col lg:flex-row lg:justify-between gap-6">
+      <footer className="bottom-0 w-full bg-gradient-to-b from-blue-primary to-[#3083D5] rounded-t-3xl pt-12 pb-12 px-8 lg:px-20 z-50">
+        <div className="w-full flex flex-col lg:flex-row lg:justify-between gap-6 z-50">
           <div className="flex flex-col gap-1">
             <div className="flex items-center gap-5">
               <img src="/assets/itebe.svg" alt="" className="w-20 h-20" />
