@@ -43,7 +43,7 @@ const Button = ({
       } rounded-full text-[12px] md:text-[16px] font-semibold ${fitContent ? "w-fit" : "w-full"} `}
     >
       {isLoading ? (
-        <div className={`flex items-center justify-center ${size == "large" ? "text-sm md:text-2xl" : size == "medium" ? "text-xl" : "text-lg"}`}>
+        <div className={`flex items-center justify-center ${size == "large" ? "text-base md:text-2xl" : size == "medium" ? "text-xl" : "text-lg"}`}>
           <svg
             className="mr-3 h-5 w-5 animate-spin"
             xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +70,7 @@ const Button = ({
         <div
           className={`${
             iconPosition == "right" ? "" : "flex-row-reverse"
-          } flex items-center justify-center gap-3 ${size == "large" ? "text-sm md:text-2xl" : size == "medium" ? "text-xl" : "text-lg font-normal"}`}
+          } flex items-center justify-center gap-3 ${size == "large" ? "text-base md:text-2xl" : size == "medium" ? "text-xl" : "text-lg font-normal"}`}
         >
           {text}
           {icon && (
