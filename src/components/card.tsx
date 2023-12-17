@@ -30,16 +30,16 @@ const Card = ({
               <img
                 src={link != undefined ? link : "/assets/image_not_found.png"}
                 alt="Card picture"
-                className="w-full h-[300px] object-cover rounded-t-[25px]"
+                className="w-full h-[150px] lg:h-[300px] object-cover rounded-t-[25px]"
               />
-              { subTipe && <p className="font-bold text-3xl text-center w-full text-purple-primary">
+              { subTipe && <p className="font-bold text-xl lg:text-3xl text-center w-full text-purple-primary">
                 {subTipe == "departemen" ? "Departemen" : "Content"}
               </p>}
-              <p className="font-medium text-xl px-4 text-center w-full">
+              <p className="font-medium text-base lg:text-xl px-4 text-center w-full">
                 {nama}
               </p>
             </div>
-            <div className="flex py-1 px-3 gap-2 text-black text-xl items-center border-2 border-black rounded-[14px]">
+            <div className="flex py-1 px-3 gap-2 text-black text-base lg:text-xl items-center border-2 border-black rounded-[14px]">
               <BiLike/>
               <p>{likes} Likes</p>
             </div>

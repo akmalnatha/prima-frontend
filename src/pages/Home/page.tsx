@@ -18,7 +18,7 @@ export default function Home() {
     <>
       <Navbar idx={0} />
       <div className="w-full h-fit min-h-screen overflow-hidden flex flex-col relative">
-        <img src="/assets/spiralhome1.svg" className="absolute lg:-top-16 -z-10 " alt="" />
+        <img src="/assets/spiralhome1.svg" className="absolute lg:-top-28 -z-10 " alt="" />
         <img src="/assets/spiralhome2.svg" className="absolute top-[200px] md:top-[80px] lg:top-[132px] xl:top-3 -z-10" alt="" />
         <img src="/assets/spiralhome3.svg" className="absolute top-[400px] lg:top-[800px] xl:top-[900px] -left-[160px] sm:-left-[240px] lg:-left-[80px] -z-10" alt="" />
         <img src="/assets/Ellipsehome1.svg" className="absolute -top-60 lg:top-72 -left-[44%] lg:-left-[5%] -z-10" alt="" />
