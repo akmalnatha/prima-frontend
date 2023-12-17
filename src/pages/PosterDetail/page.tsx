@@ -19,6 +19,7 @@ export default function PosterDetail() {
   });
   const [likess, setLikess] = useState(risetData.liked);
   const [likessCount, setLikessCount] = useState(risetData.like_count);
+  const [link, setLink] = useState("");
   const handleLike = (e: any) => {
     e.preventDefault();
     setLikess(!likess);
@@ -41,6 +42,7 @@ export default function PosterDetail() {
           setRisetData(res);
           setLikess(res.liked);
           setLikessCount(res.like_count);
+          setLink(res.picture_ori);
         })
         .finally(() => {
           setIsLoading(false);
@@ -108,7 +110,7 @@ export default function PosterDetail() {
           <div className="mt-12 w-full h-fit z-40">
             <div className="w-fit h-fit border-[10px] border-[#3F4283] mx-auto">
               <img
-                src="/assets/poster1.svg"
+                src={`https://prima.itb.ac.id/adminpanel/${link}`}
                 alt=""
                 className=" -translate-x-4 translate-y-4"
               />
