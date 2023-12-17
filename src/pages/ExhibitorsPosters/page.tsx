@@ -15,7 +15,7 @@ export default function ExhibitorsPosters() {
         <p className="mt-[96px] lg:mt-[160px] font-bold text-[28px] lg:text-[60px] text-center">
           PRIMA ITB 2023
         </p>
-        <p className="mt-3 font-bold text-[28px] lg:text-[60px] text-center bg-gradient-to-b from-[#275791] to-[#0B25BE] bg-clip-text text-transparent">
+        <p className="mt-3 font-bold text-[28px] lg:text-[60px] text-center bg-gradient-to-b from-blue-primary to-blue-light bg-clip-text text-transparent">
           Exhibitors Posters
         </p>
         <p className="mt-3 font-medium text-[10px] lg:text-[28px] text-center">
