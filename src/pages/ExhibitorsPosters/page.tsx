@@ -57,7 +57,10 @@ export default function ExhibitorsPosters() {
   const indexOfLastItem = current * 9;
   const indexOfFirstItem = indexOfLastItem - 9;
   const currentItems = riset.slice(indexOfFirstItem, indexOfLastItem);
-
+  const totalPages = (riset.length == 9 ? 0 : 1) + Math.floor(riset.length / 9)
+  if(current > totalPages){
+    setCurrent(1)
+  }
   return (
     <>
       <LayoutAuth title={"Prima ITB 2023"} needAuth={true}>
@@ -108,7 +111,7 @@ export default function ExhibitorsPosters() {
             <div className="w-full lg:w-1/2">
               <SearchBar
                 placeholder={"Search ..."}
-                onChange={(e) => setSearch(e.target.value)}
+                onChange={(e) => {setSearch(e.target.value); if(e.target.value == ""){searchHandler("")}}}
                 onClick={() => searchHandler(search)}
               />
             </div>
@@ -148,9 +151,7 @@ export default function ExhibitorsPosters() {
           )}
           <div className="mt-4 w-full flex justify-center">
             <Paginate
-              totalPages={
-                (riset.length == 9 ? 0 : 1) + Math.floor(riset.length / 9)
-              }
+              totalPages={totalPages}
               current={(e) => setCurrent(e)}
             />
           </div>

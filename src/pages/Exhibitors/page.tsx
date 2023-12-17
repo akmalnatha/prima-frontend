@@ -7,10 +7,11 @@ import Paginate from "../../components/paginate";
 import SearchBar from "../../components/searchbar";
 import LayoutAuth from "../../layout/LayoutAuth";
 import { useNavigate, useParams } from "react-router";
-import { getDepartments } from "../../api/api";
+import { getDepartments, searchDepartment } from "../../api/api";
 
 export default function Exhibitors() {
   const navigate = useNavigate();
+  const [search, setSearch] = useState("");
   const [current, setCurrent] = useState(1);
   const [departmentData, setDepartmentData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +21,6 @@ export default function Exhibitors() {
   useEffect(() => {
     setIsLoading(true);
     const data = getDepartments();
-    console.log(data);
     data
       .then((res) => {
         const filteredData = res.filter((item: any) => {
@@ -31,16 +31,40 @@ export default function Exhibitors() {
           return false;
         });
         setDepartmentData(filteredData);
-        console.log(filteredData);
       })
       .finally(() => {
         setIsLoading(false);
       });
-  }, [current]);
+  }, []);
+
+  const searchHandler = (e: string) => {
+    if (params && params.year) {
+      setIsLoading(true);
+      const hasilSearch = searchDepartment(e);
+      hasilSearch
+      .then((res) => {
+        const filteredData = res.filter((item: any) => {
+          const createdAtYear = new Date(item.created_at).getFullYear();
+          if (params && params.year && typeof params.year === "string") {
+            return createdAtYear === parseInt(params.year, 10);
+          }
+          return false;
+        });
+          setDepartmentData(filteredData);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  };
 
   const indexOfLastItem = current * 9;
   const indexOfFirstItem = indexOfLastItem - 9;
   const currentItems = departmentData.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = (departmentData.length == 9 ? 0 : 1) + Math.floor(departmentData.length / 9)
+  if(current > totalPages){
+    setCurrent(1)
+  }
 
   return (
     <>
@@ -90,7 +114,7 @@ export default function Exhibitors() {
               />
             </div>
             <div className="w-full lg:w-1/2">
-              <SearchBar placeholder={"Search ..."} />
+              <SearchBar placeholder={"Search ..."} onChange={(e) => {setSearch(e.target.value); if(e.target.value == ""){searchHandler("")}}} onClick={() => searchHandler(search)}/>
             </div>
           </div>
           {isLoading ? (
@@ -130,10 +154,7 @@ export default function Exhibitors() {
           )}
           <div className="mt-4 w-full flex justify-center z-40">
             <Paginate
-              totalPages={
-                (departmentData.length == 9 ? 0 : 1) +
-                Math.floor(departmentData.length / 9)
-              }
+              totalPages={totalPages}
               current={(e) => setCurrent(e)}
             />
           </div>

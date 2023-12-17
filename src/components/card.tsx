@@ -78,6 +78,7 @@ const Card = ({
               <p className="font-medium text-base lg:text-xl px-4 text-center w-full">
                 {nama}
               </p>
+            </div>
               <div className="flex justify-between items-center w-full px-6">
                 <Button type={"button"} color="primary" icon iconPosition="right" size="small" text="See Posters"/>
                 <div className={`flex flex-col ${likedPost ? "text-purple-primary" : "text-black"} hover:text-blue-light active:text-blue-primary text-3xl items-center`} onClick={() => handleLikePost()}>
@@ -85,7 +86,6 @@ const Card = ({
                   <p className="text-xs">{totalLikes} Likes</p>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       )}
