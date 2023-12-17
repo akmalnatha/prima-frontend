@@ -1,4 +1,4 @@
-import { Fragment, useEffect, ReactNode } from "react";
+import { Fragment, useEffect, ReactNode, useState } from "react";
 import { getSelfStats, postBukuTamu } from "../api/api";
 const LayoutAuth = ({
     title,
@@ -9,6 +9,9 @@ const LayoutAuth = ({
     children: ReactNode; 
     needAuth?: boolean;
   }) => {
+//   const test = getSelfStats()
+//   console.log(test)
+//   const [isRegistered, setIsRegistered] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
         document.title = title;
@@ -28,8 +31,10 @@ const LayoutAuth = ({
               .then((r: any) => {
                 if (r.status === 200) {
                   alert('Anda berhasil terdaftar di buku tamu, selamat menikmati pameran');
+                  window.location.reload();
+                } else {
+                  alert('Pendaftaran gagal, silahkan coba lagi!')
                 }
-                window.location.reload();
               });
           }
         }
