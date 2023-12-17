@@ -74,7 +74,7 @@ export default function Home() {
           </div>
           <div className="mt-10 lg:mt-14 w-[72%] h-fit mx-auto border-[10px] border-blue-dark mb-[240px]">
             <div className="relative overflow-hidden h-0 pb-[56.25%] -translate-x-4 translate-y-4">
-              <YoutubeEmbed embedId={"jia3fhBQ8qI"} />
+              <YoutubeEmbed embedId={"3Q9GXus_GEQ"} />
             </div>
           </div>
           <Footer />

@@ -5,9 +5,32 @@ import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
 import SearchBar from "../../components/searchbar";
 import LayoutAuth from "../../layout/LayoutAuth";
+import { useState, useEffect } from "react";
+import { getMostLiked, websiteUrl } from "../../api/api";
 
 export default function NonVirtual() {
   const navigate = useNavigate();
+  const [search, setSearch] = useState<string>("");
+  const [pameranYear, setPameranYear] = useState<any>(null);
+  const [mostPameran, setMostPameran] = useState<any>(null);
+  const [deptYear, setDeptYear] = useState<any>(null);
+  const [mostDept, setMostDept] = useState<any>(null);
+  useEffect(() => {
+    getMostLiked()
+      .then((res) => {
+        setPameranYear(new Date(res.data.research.created_at).getFullYear());
+        setDeptYear(new Date(res.data.department.created_at).getFullYear());
+        setMostPameran(res.data.research);
+        setMostDept(res.data.department);
+      })
+      .catch((e) => {
+        console.log(e)
+      });
+  }, []);
+
+  const searchHandler = () => {
+    window.location.replace("/exhibitor-gallery/researches?search=" + search);
+  };
   return (
     <>
       <LayoutAuth title={"Prima ITB 2023"} needAuth={true}>
@@ -38,14 +61,10 @@ export default function NonVirtual() {
             className="absolute -left-32 top-[680px] md:top-[560px] lg:top-[200px] w-[65%] lg:w-[45%] -z-10"
             alt=""
           />
+          {/* <img src="/assets/EllipseNonVirtual1.png" className="absolute -left-36 lg:-left-[340px] top-[200px] lg:top-[1400px] w-[90%] sm:w-[65%] lg:w-[45%] -z-10" alt="" /> */}
           <img
             src="/assets/EllipseNonVirtual1.png"
-            className="absolute -left-36 lg:-left-[340px] top-[200px] lg:top-[1400px] w-[90%] sm:w-[65%] lg:w-[45%] -z-10"
-            alt=""
-          />
-          <img
-            src="/assets/EllipseNonVirtual1.png"
-            className="absolute -right-60 lg:-right-[340px] top-[1900px] lg:top-[800px] w-[90%] sm:w-[65%] lg:w-[45%] -z-10"
+            className="absolute -right-60 lg:-right-[340px] top-[900px] lg:top-[800px] w-[90%] sm:w-[65%] lg:w-[45%] -z-10"
             alt=""
           />
           <img
@@ -73,44 +92,61 @@ export default function NonVirtual() {
               onClick={() => navigate("/exhibitors/2023")}
             />
           </div>
-          <div className="mt-10 lg:mt-16 w-full flex justify-center lg:justify-end">
+          {/* <div className="mt-10 lg:mt-16 w-full flex justify-center lg:justify-end">
             <div className="w-full lg:w-1/2">
-              <SearchBar placeholder={"Search ..."} />
+              <SearchBar
+                placeholder={"Search ..."}
+                onChange={(e) => setSearch(e.target.value)}
+                onClick={() => searchHandler()}
+              />
             </div>
-          </div>
-          <div className="w-full lg:w-[85%] mx-auto mt-6 lg:mt-12 mb-[132px] sm:mb-[208px] md:mb-[308px] lg:mb-[328px] rounded-[40px] border-2 border-[#3F4283] pt-14 pb-20 px-[6%] bg-gradient-to-b from-80% from-transparent to-90% to-white">
+          </div> */}
+          <div className="w-full lg:w-[85%] mx-auto mt-6 lg:mt-12 mb-[132px] sm:mb-[208px] md:mb-[308px] lg:mb-[328px] rounded-[40px] border-2 border-[#3F4283] pt-14 pb-20 px-[6%] bg-gradient-to-b lg:from-80% from-90% from-transparent lg:to-80% to-95% to-white">
             <p className="text-2xl lg:text-4xl text-center font-bold">
               Most Liked
             </p>
-            <div className="mt-16 grid grid-rows-4 grid-cols-1 lg:grid-cols-2 lg:grid-rows-2 gap-x-7 gap-y-16 justify-items-center mx-auto">
-              <Card
-                tipe={"most liked"}
-                nama={"Sekolah Bisnis Manajemen (SBM)"}
-                subTipe="departemen"
-                id={""}
-              />
-              <Card
-                tipe={"most liked"}
-                nama={
-                  "Penyiapan “Desa Tanggap Banjir” di Kawasan Pesisir Sungan Peusangan, Provinsi Aceh"
-                }
-                subTipe="content"
-                id={""}
-              />
-              <Card
-                tipe={"most liked"}
-                nama={"Sekolah Bisnis Manajemen (SBM)"}
-                subTipe="departemen"
-                id={""}
-              />
-              <Card
-                tipe={"most liked"}
-                nama={
-                  "Penyiapan “Desa Tanggap Banjir” di Kawasan Pesisir Sungan Peusangan, Provinsi Aceh"
-                }
-                subTipe="content"
-                id={""}
-              />
+            <div className="mt-10 lg:mt-16 grid grid-rows-2 grid-cols-1 lg:grid-cols-2 lg:grid-rows-1 gap-x-7 gap-y-16 justify-items-center mx-auto">
+              {mostDept != null ? (
+                <Card
+                  tipe={"most liked"}
+                  nama={mostDept.name}
+                  subTipe="departemen"
+                  link={websiteUrl + "/" + mostDept.picture}
+                  likes={mostDept.like_count}
+                  onClick={() => navigate("/exhibitors-posters/"+mostDept.id)}
+                  id=""
+                />
+              ) : (
+                <Card
+                  tipe={"most liked"}
+                  nama={"Data tidak ditemukan"}
+                  subTipe="departemen"
+                  id=""
+                />
+              )}
+              {mostPameran != null ? (
+                <Card
+                  tipe={"most liked"}
+                  nama={mostPameran.title}
+                  subTipe="content"
+                  link={websiteUrl + "/" + mostPameran.picture_compressed}
+                  likes={mostPameran.like_count}
+                  onClick={() =>
+                    navigate(
+                      "/detail/"+
+                        mostPameran.id
+                    )
+                  }
+                  id=""
+                />
+              ) : (
+                <Card
+                  tipe={"most liked"}
+                  nama={"Data tidak ditemukan"}
+                  subTipe="content"
+                  id=""
+                />
+              )}
             </div>
           </div>
         </div>

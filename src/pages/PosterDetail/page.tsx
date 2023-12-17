@@ -96,7 +96,7 @@ export default function PosterDetail() {
                 text="Back to Exhibitor Posters"
                 color="secondary"
                 size="medium"
-                onClick={() => nav("/exhibitors-posters")}
+                onClick={() => nav(-1)}
               />
             </div>
             <Button
