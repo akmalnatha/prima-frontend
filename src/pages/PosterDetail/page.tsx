@@ -23,19 +23,21 @@ export default function PosterDetail() {
             iconPosition="left"
             text="Back to Exhibitor Posters"
             color="secondary"
+            size="medium"
             onClick={() => nav("/exhibitors")}
-          />
+            />
           <Button
             type={"button"}
             icon={true}
             iconPosition="left"
             text="Back to Exhibitor List"
             color="secondary"
+            size="medium"
           />
         </div>
-        <div className="mt-12 w-full h-[1000px] pl-14">
-            <div className="w-fit h-fit border-[6px] border-[#3F4283]">
-                <img src="/assets/poster1.svg" alt="" className=" -translate-x-14 translate-y-10" />
+        <div className="mt-12 w-full h-fit pl-14">
+            <div className="w-fit h-fit border-[10px] border-[#3F4283]">
+                <img src="/assets/poster1.svg" alt="" className=" -translate-x-4 translate-y-4" />
             </div>
         </div>
       </div>
