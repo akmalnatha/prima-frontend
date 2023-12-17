@@ -83,9 +83,9 @@ const Button = ({
                 src={
                   color == "primary"
                     ? size == "large"
-                      ? "assets/button_arrow_white.svg"
-                      : "assets/button_arrow_circle.svg"
-                    : "assets/button_arrow_black.svg"
+                      ? "/assets/button_arrow_white.svg"
+                      : "/assets/button_arrow_circle.svg"
+                    : "/assets/button_arrow_black.svg"
                 }
                 alt="arrow"
                 className={`${size == "large" && "py-2 px-4 border-2 border-white"} rounded-full`}

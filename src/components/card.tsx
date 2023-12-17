@@ -45,7 +45,7 @@ const Card = ({
               <img
                 src={link != undefined ? link : "/assets/image_not_found.png"}
                 alt="Card picture"
-                className="w-full h-[150px] lg:h-[300px] object-cover rounded-t-[25px]"
+                className="w-full h-[180px] lg:h-[300px] object-cover rounded-t-[25px]"
               />
               { subTipe && <p className="font-bold text-xl lg:text-3xl text-center w-full text-purple-primary">
                 {subTipe == "departemen" ? "Departemen" : "Content"}

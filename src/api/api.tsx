@@ -24,7 +24,7 @@ export const getDepartments = async () => {
     });
     return hasil.data.data;
   } catch (e) {
-    console.log("BENCANA INI DILUAR NALAR MANUSIA");
+    console.log(e);
   }
 };
 
@@ -40,7 +40,7 @@ export const getDepartmentByID = async (id: number, offset=0) => {
     return hasil.data;
     //   return hasil.data.data;
   } catch (e) {
-    console.log("BENCANA INI DILUAR NALAR MANUSIA");
+    console.log(e);
   }
 };
 
@@ -57,7 +57,7 @@ export const searchResearch = async (id: number, s: string) => {
     return hasil.data;
     //   return hasil.data.data;
   } catch (e) {
-    console.log("BENCANA INI DILUAR NALAR MANUSIA");
+    console.log(e);
   }
 };
 
@@ -72,7 +72,7 @@ export const searchDepartment = async (s: string) => {
     });
     return hasil.data.data;
   } catch (e) {
-    console.log("BENCANA INI DILUAR NALAR MANUSIA");
+    console.log(e);
   }
 };
 
@@ -87,7 +87,7 @@ export const getAllResearch = async (s = '', offset = 0) => {
     });
     return hasil.data.data;
   } catch (e) {
-    console.log("BENCANA INI DILUAR NALAR MANUSIA");
+    console.log(e);
   }
 }
 
@@ -103,7 +103,7 @@ export const getResearchByID = async (id: number) => {
     // console.log(hasil)
     return hasil.data.data;
   } catch (e) {
-    console.log("BENCANA INI DILUAR NALAR MANUSIA");
+    console.log(e);
   }
 };
 
@@ -129,7 +129,7 @@ export const likeDepartments = async (like: any, id: number) => {
     );
     return data;
   } catch (e) {
-    console.log("BENCANA INI DILUAR NALAR MANUSIA");
+    console.log(e);
   }
 };
 
@@ -145,7 +145,7 @@ export const likeResearches = async (like: any, id: number) => {
     );
     return data;
   } catch (e) {
-    console.log("BENCANA INI DILUAR NALAR MANUSIA");
+    console.log(e);
   }
 };
 
