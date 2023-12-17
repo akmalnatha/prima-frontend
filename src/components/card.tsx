@@ -56,9 +56,9 @@ const Card = ({
                 {nama}
               </p>
             </div>
-            <div className={`flex py-1 px-3 gap-2 ${likedPost ? "text-purple-primary border-purple-primary" : "text-black border-black"} hover:text-blue-light active:text-blue-primary hover:border-blue-light active:border-blue-primary text-base lg:text-xl items-center border-2 rounded-[14px]`} onClick={() => handleLikePost()}>
-              {likedPost ? <BiSolidLike/> : <BiLike/>}
-              <p>{totalLikes} Likes</p>
+            <div className={`flex py-1 px-3 gap-2 ${likedPost ? "text-purple-primary border-purple-primary" : "text-black border-black"} text-base lg:text-xl items-center border-2 rounded-[14px]`}>
+              <BiLike/>
+              <p>{likes} Likes</p>
             </div>
           </div>
         </div>
@@ -98,7 +98,7 @@ const Card = ({
             <img
               src={link != undefined ? link : "/assets/image_not_found.png"}
               alt="Card picture"
-              className="w-full h-[670px] object-cover"
+              className="w-full h-[496px] object-contain"
             />
             <p className="font-medium text-base lg:text-xl px-4 text-center w-full">
               {nama}

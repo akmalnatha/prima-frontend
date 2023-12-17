@@ -44,7 +44,7 @@ export const getDepartmentByID = async (id: string, offset=0) => {
   }
 };
 
-export const searchResearch = async (id: number, s: string) => {
+export const searchResearch = async (id: string, s: string) => {
   try {
     const hasil = await axios({
       method: "GET",

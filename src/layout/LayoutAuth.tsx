@@ -31,11 +31,10 @@ const LayoutAuth = ({
               .then((r: any) => {
                 if (r.status === 200) {
                   alert('Anda berhasil terdaftar di buku tamu, selamat menikmati pameran');
-                  window.location.reload();
                 } else {
                   alert('Pendaftaran gagal, silahkan coba lagi!')
                 }
-              });
+              }).finally(() => window.location.reload());
           }
         }
       };

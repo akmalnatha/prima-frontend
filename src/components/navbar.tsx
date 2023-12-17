@@ -109,10 +109,10 @@ function Navbar({ idx }: { idx: number }) {
                     id="dropdown"
                     className="absolute flex w-fit mt-40 flex-col bg-white shadow-lg bg-opacity-75 rounded-xl"
                   >
-                    <NavLink className="py-4 px-6 text-[16px] md:text-[20px] font-normal hover:font-bold hover:bg-gray-300 rounded-t-xl" to={"/arsip"}>
+                    <NavLink className="py-4 px-6 text-[16px] md:text-[20px] font-normal hover:font-bold hover:bg-gray-300 rounded-t-xl" to={"/non-virtual/2022"}>
                       Gallery 2022
                     </NavLink>
-                    <NavLink className="py-4 px-6 text-[16px] md:text-[20px] font-normal hover:font-bold hover:bg-gray-300 rounded-b-xl" to={"/arsip"}>
+                    <NavLink className="py-4 px-6 text-[16px] md:text-[20px] font-normal hover:font-bold hover:bg-gray-300 rounded-b-xl" to={"/non-virtual/2021"}>
                       Gallery 2021
                     </NavLink>
                   </div>
