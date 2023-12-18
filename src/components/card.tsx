@@ -8,6 +8,7 @@ const Card = ({
   tipe = "most liked",
   subTipe,
   nama,
+  penulis,
   likes = 0,
   link,
   onClick,
@@ -18,6 +19,7 @@ const Card = ({
   tipe: "exhibitors" | "most liked" | "posters";
   subTipe?: "departemen" | "content";
   nama: string;
+  penulis?: string;
   likes?: number;
   link?: string;
   onClick?: MouseEventHandler<HTMLDivElement> | undefined;
@@ -75,7 +77,7 @@ const Card = ({
               <img
                 src={link != undefined ? link : "/assets/image_not_found.png"}
                 alt="Card picture"
-                className="w-full h-[290px] object-cover rounded-t-[25px]"
+                className="w-full h-[290px] object-contain rounded-t-[25px]"
               />
               <p className="font-medium text-base lg:text-xl px-4 text-center w-full">
                 {nama}
@@ -104,6 +106,9 @@ const Card = ({
             />
             <p className="font-medium text-base lg:text-xl px-4 text-center w-full">
               {nama}
+            </p>
+            <p className="font-normal text-xs lg:text-base px-4 text-center w-full">
+              {penulis}
             </p>
           </div>
         </div>
