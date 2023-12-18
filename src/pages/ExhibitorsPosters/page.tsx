@@ -14,29 +14,39 @@ export default function ExhibitorsPosters() {
   const [current, setCurrent] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
-  const [namaDepartemen, setNamaDepartemen] = useState("");
+  const [namaDepartemen, setNamaDepartemen] = useState("yuhu");
   const [banyakRiset, setBanyakRiset] = useState(0);
   const [riset, setRiset] = useState<any[]>([]);
   const navigate = useNavigate();
 
+  const [data, setData] = useState<any[]>(["y"]);
+
   useEffect(() => {
     if (params && params.id) {
       setIsLoading(true);
-      const data = getDepartmentByID(params.id, 0);
-      data
-        .then((res) => {
-          setNamaDepartemen(res.data.name);
+      let i = 0;
+      // const dataNamaDepartemen = getDepartmentByID(params.id, i);
+      // dataNamaDepartemen.then((res) => {
+      //   setNamaDepartemen(res.data.name);
+      // })
+      while (data) {
+        const datum = getDepartmentByID(params.id, i);
+        datum.then((res) => {
+          setData(res);
           const ris = riset.concat(res.research);
           setRiset(ris);
-        })
-        .finally(() => {
-          if (riset.length > banyakRiset) {
-            setBanyakRiset(riset.length);
-          } else if (riset.length === banyakRiset && banyakRiset !== 0) {
-            // setHideLoadMore(true)
-          }
-          setIsLoading(false);
         });
+        i++;
+      }
+
+      // .finally(() => {
+      //   if (riset.length > banyakRiset) {
+      //     setBanyakRiset(riset.length);
+      //   } else if (riset.length === banyakRiset && banyakRiset !== 0) {
+      //     // setHideLoadMore(true)
+      //   }
+      //   setIsLoading(false);
+      // });
     }
   }, []);
 
@@ -57,17 +67,17 @@ export default function ExhibitorsPosters() {
   const indexOfLastItem = current * 9;
   const indexOfFirstItem = indexOfLastItem - 9;
   const currentItems = riset.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = (riset.length == 9 ? 0 : 1) + Math.floor(riset.length / 9)
-  if(current > totalPages){
-    setCurrent(1)
+  const totalPages = (riset.length == 9 ? 0 : 1) + Math.floor(riset.length / 9);
+  if (current > totalPages) {
+    setCurrent(1);
   }
   return (
     <>
       <LayoutAuth title={"Prima ITB 2023"} needAuth={true}>
         <Navbar idx={5} />
-        <div className="w-96 h-full absolute top-[-100px] right-[0px] bg-[url('./assets/spiralexhibitors2.svg')] bg-cover -z-10"/>
+        <div className="w-96 h-full absolute top-[-100px] right-[0px] bg-[url('./assets/spiralexhibitors2.svg')] bg-cover -z-10" />
         <div className="w-full h-full flex flex-col px-10 lg:px-24 mb-[100px] lg:mb-[120px] relative">
-        <img
+          <img
             src="/assets/radial.svg"
             alt=""
             className="absolute top-[-10px] left-[-100px] -z-10"
@@ -111,7 +121,12 @@ export default function ExhibitorsPosters() {
             <div className="w-full lg:w-1/2">
               <SearchBar
                 placeholder={"Search ..."}
-                onChange={(e) => {setSearch(e.target.value); if(e.target.value == ""){searchHandler("")}}}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  if (e.target.value == "") {
+                    searchHandler("");
+                  }
+                }}
                 onClick={() => searchHandler(search)}
               />
             </div>
@@ -144,16 +159,13 @@ export default function ExhibitorsPosters() {
                   nama={item.title}
                   link={websiteUrl + "/" + item.picture_compressed}
                   id={""}
-                  onClick={() => navigate("/detail/"+item.id)}
+                  onClick={() => navigate("/detail/" + item.id)}
                 />
               ))}
             </div>
           )}
           <div className="mt-4 w-full flex justify-center">
-            <Paginate
-              totalPages={totalPages}
-              current={(e) => setCurrent(e)}
-            />
+            <Paginate totalPages={totalPages} current={(e) => setCurrent(e)} />
           </div>
         </div>
         <Footer />
