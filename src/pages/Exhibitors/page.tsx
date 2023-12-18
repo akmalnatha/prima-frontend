@@ -93,7 +93,7 @@ export default function Exhibitors() {
             className="absolute top-[800px] left-[-100px]"
           />
           <p className="mt-[96px] lg:mt-[160px] font-bold text-[28px] lg:text-[60px] text-center z-40">
-            PRIMA ITB 2023
+            PRIMA ITB {params.year}
           </p>
           <p className="mt-3 font-bold text-[28px] lg:text-[60px] text-center bg-gradient-to-b from-blue-primary to-blue-light bg-clip-text text-transparent">
             Exhibitors
