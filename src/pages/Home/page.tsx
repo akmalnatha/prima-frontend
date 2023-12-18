@@ -62,14 +62,14 @@ export default function Home() {
             <Button
               type={"button"}
               color="primary"
-              text="Virtual 3D Gallery"
-              fitContent={false}
+              text="Virtual Walkthrough"
               onClick={() => window.location.href = "https://app.lapentor.com/sphere/prima-2023-pameran-riset-inovasi-pengabdian-masyarakat"}
-            />
+              />
             <Button
               type={"button"}
               color="primary"
-              text="Non-Virtual 3D Gallery"
+              text="Virtual Gallery"
+              fitContent={false}
               onClick={() => navigate("/non-virtual/2023")}
             />
           </div>

@@ -45,10 +45,10 @@ export default function ExhibitorsPosters() {
       if(params && params.id){
         setIsLoading(true)
         const res = await getDepartmentByID(params.id, currentOffset);
-        // console.log(res)
-          if (res.research && res.research.length > 0) {
-            if(updatedRiset.length>0 && (updatedRiset[updatedRiset.length - 1].id != res.research[res.research.length - 1].id)){
-              updatedRiset = updatedRiset.concat(res.research);
+        if (res.research && res.research.length > 0) {
+          if(updatedRiset.length>0 && (updatedRiset[updatedRiset.length - 1].id != res.research[res.research.length - 1].id)){
+            updatedRiset = updatedRiset.concat(res.research);
+            console.log(updatedRiset)
             }
             else if(updatedRiset.length==0){
               updatedRiset = updatedRiset.concat(res.research);
@@ -74,8 +74,11 @@ export default function ExhibitorsPosters() {
     };
 
     fetchDataWrapper();
-    fetchDepartmentName();
   }, []);
+  
+  useEffect(() => {
+    fetchDepartmentName();
+  },[])
 
   // useEffect(() => {
   //   if (params && params.id) {
@@ -124,8 +127,8 @@ export default function ExhibitorsPosters() {
     <>
       <LayoutAuth title={"Prima ITB 2023"} needAuth={true}>
         <Navbar idx={5} />
-        <div className="w-96 h-full absolute top-[-100px] right-[0px] bg-[url('./assets/spiralexhibitors2.svg')] bg-cover -z-10"/>
-        <div className="w-full h-full flex flex-col px-10 lg:px-24 mb-[100px] lg:mb-[120px] relative">
+        <div className="w-full h-fit min-h-screen overflow-hidden flex flex-col px-10 lg:px-24 pb-[100px] lg:pb-[120px] relative">
+        <img src="/assets/spiralexhibitors2.svg" alt="" className="w-96 absolute top-[-100px] right-[0px] object-cover -z-10"/>
         <img
             src="/assets/radial.svg"
             alt=""
@@ -201,6 +204,7 @@ export default function ExhibitorsPosters() {
                 <Card
                   tipe={"posters"}
                   nama={item.title}
+                  penulis={item.authors}
                   link={websiteUrl + "/" + item.picture_compressed}
                   id={""}
                   onClick={() => navigate("/detail/"+item.id)}

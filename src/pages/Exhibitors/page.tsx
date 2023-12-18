@@ -70,8 +70,9 @@ export default function Exhibitors() {
     <>
       <LayoutAuth title={"Prima ITB 2023"} needAuth={true}>
         <Navbar idx={5} />
-        <div className="w-96 h-full absolute top-[-100px] right-[0px] z-0 bg-[url('./assets/spiralexhibitors2.svg')] bg-cover" />
-        <div className="w-full h-full flex flex-col px-10 lg:px-24 mb-[100px] lg:mb-[120px]">
+        {/* <div className="w-96 h-full absolute top-[-100px] right-[0px] z-0 bg-[url('./assets/spiralexhibitors2.svg')] bg-cover" /> */}
+        <div className="w-full h-fit min-h-screen overflow-hidden flex flex-col px-10 lg:px-24 pb-[100px] lg:pb-[120px] relative">
+          <img src="/assets/spiralexhibitors2.svg" alt="" className="w-96 absolute top-[-100px] right-[0px] object-cover -z-10"/>
           <img
             src="/assets/radial.svg"
             alt=""
