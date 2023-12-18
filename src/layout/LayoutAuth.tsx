@@ -16,7 +16,7 @@ const LayoutAuth = ({
     const fetchData = async () => {
         document.title = title;
         if (needAuth) {
-          if (!(await getSelfStats())) {
+          if (!await getSelfStats()) {
             let nama = prompt("Masukkan nama anda");
             while (nama!.length < 1) {
               alert("masukkan nama dengan benar");

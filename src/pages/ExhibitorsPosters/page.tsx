@@ -14,41 +14,90 @@ export default function ExhibitorsPosters() {
   const [current, setCurrent] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const params = useParams();
-  const [namaDepartemen, setNamaDepartemen] = useState("yuhu");
+  const [namaDepartemen, setNamaDepartemen] = useState("");
   const [banyakRiset, setBanyakRiset] = useState(0);
   const [riset, setRiset] = useState<any[]>([]);
   const navigate = useNavigate();
 
-  const [data, setData] = useState<any[]>(["y"]);
+  let updatedRiset:any[] = []
+  
+  const fetchDepartmentName = async () => {
+    setIsLoading(true);
+    try{
+      if(params && params.id){
+        const res = await getDepartmentByID(params.id)
+        if(res.data){
+          console.log(res.data.name)
+          setNamaDepartemen(res.data.name)
+        }
+      }
+    }
+    catch(e){
+      console.error('Error fetching data:', e);
+    }
+    finally{
+      setIsLoading(false)
+    }
+  }
+
+  const fetchData = async (currentOffset: number) => {
+    try {
+      if(params && params.id){
+        setIsLoading(true)
+        const res = await getDepartmentByID(params.id, currentOffset);
+        // console.log(res)
+          if (res.research && res.research.length > 0) {
+            if(updatedRiset.length>0 && (updatedRiset[updatedRiset.length - 1].id != res.research[res.research.length - 1].id)){
+              updatedRiset = updatedRiset.concat(res.research);
+            }
+            else if(updatedRiset.length==0){
+              updatedRiset = updatedRiset.concat(res.research);
+            }
+            fetchData(currentOffset + 1); // Recursive call for the next iteration
+          } 
+      }
+    } catch (error) {
+      // Handle error
+      console.error('Error fetching data:', error);
+    } finally {
+      setRiset(updatedRiset)
+      if (riset.length > banyakRiset) {
+        setBanyakRiset(riset.length);
+      } 
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    if (params && params.id) {
-      setIsLoading(true);
-      let i = 0;
-      // const dataNamaDepartemen = getDepartmentByID(params.id, i);
-      // dataNamaDepartemen.then((res) => {
-      //   setNamaDepartemen(res.data.name);
-      // })
-      while (data) {
-        const datum = getDepartmentByID(params.id, i);
-        datum.then((res) => {
-          setData(res);
-          const ris = riset.concat(res.research);
-          setRiset(ris);
-        });
-        i++;
-      }
+    const fetchDataWrapper = async () => {
+      await fetchData(0);
+    };
 
-      // .finally(() => {
-      //   if (riset.length > banyakRiset) {
-      //     setBanyakRiset(riset.length);
-      //   } else if (riset.length === banyakRiset && banyakRiset !== 0) {
-      //     // setHideLoadMore(true)
-      //   }
-      //   setIsLoading(false);
-      // });
-    }
+    fetchDataWrapper();
+    fetchDepartmentName();
   }, []);
+
+  // useEffect(() => {
+  //   if (params && params.id) {
+  //     setIsLoading(true);
+  //     const data = getDepartmentByID(params.id, 0);
+  //     console.log(data)
+  //     data
+  //       .then((res) => {
+  //         setNamaDepartemen(res.data.name);
+  //         const ris = riset.concat(res.research);
+  //         setRiset(ris);
+  //       })
+  //       .finally(() => {
+  //         if (riset.length > banyakRiset) {
+  //           setBanyakRiset(riset.length);
+  //         } else if (riset.length === banyakRiset && banyakRiset !== 0) {
+  //           // setHideLoadMore(true)
+  //         }
+  //         setIsLoading(false);
+  //       });
+  //   }
+  // }, []);
 
   const searchHandler = (e: string) => {
     if (params && params.id) {
@@ -67,17 +116,17 @@ export default function ExhibitorsPosters() {
   const indexOfLastItem = current * 9;
   const indexOfFirstItem = indexOfLastItem - 9;
   const currentItems = riset.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = (riset.length == 9 ? 0 : 1) + Math.floor(riset.length / 9);
-  if (current > totalPages) {
-    setCurrent(1);
+  const totalPages = (riset.length == 9 ? 0 : 1) + Math.floor(riset.length / 9)
+  if(current > totalPages){
+    setCurrent(1)
   }
   return (
     <>
       <LayoutAuth title={"Prima ITB 2023"} needAuth={true}>
         <Navbar idx={5} />
-        <div className="w-96 h-full absolute top-[-100px] right-[0px] bg-[url('./assets/spiralexhibitors2.svg')] bg-cover -z-10" />
+        <div className="w-96 h-full absolute top-[-100px] right-[0px] bg-[url('./assets/spiralexhibitors2.svg')] bg-cover -z-10"/>
         <div className="w-full h-full flex flex-col px-10 lg:px-24 mb-[100px] lg:mb-[120px] relative">
-          <img
+        <img
             src="/assets/radial.svg"
             alt=""
             className="absolute top-[-10px] left-[-100px] -z-10"
@@ -121,12 +170,7 @@ export default function ExhibitorsPosters() {
             <div className="w-full lg:w-1/2">
               <SearchBar
                 placeholder={"Search ..."}
-                onChange={(e) => {
-                  setSearch(e.target.value);
-                  if (e.target.value == "") {
-                    searchHandler("");
-                  }
-                }}
+                onChange={(e) => {setSearch(e.target.value); if(e.target.value == ""){searchHandler("")}}}
                 onClick={() => searchHandler(search)}
               />
             </div>
@@ -159,13 +203,16 @@ export default function ExhibitorsPosters() {
                   nama={item.title}
                   link={websiteUrl + "/" + item.picture_compressed}
                   id={""}
-                  onClick={() => navigate("/detail/" + item.id)}
+                  onClick={() => navigate("/detail/"+item.id)}
                 />
               ))}
             </div>
           )}
           <div className="mt-4 w-full flex justify-center">
-            <Paginate totalPages={totalPages} current={(e) => setCurrent(e)} />
+            <Paginate
+              totalPages={totalPages}
+              current={(e) => setCurrent(e)}
+            />
           </div>
         </div>
         <Footer />
