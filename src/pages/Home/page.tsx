@@ -64,6 +64,7 @@ export default function Home() {
               color="primary"
               text="Virtual 3D Gallery"
               fitContent={false}
+              onClick={() => window.location.href = "https://app.lapentor.com/sphere/prima-2023-pameran-riset-inovasi-pengabdian-masyarakat"}
             />
             <Button
               type={"button"}

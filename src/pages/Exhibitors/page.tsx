@@ -70,7 +70,7 @@ export default function Exhibitors() {
     <>
       <LayoutAuth title={"Prima ITB 2023"} needAuth={true}>
         <Navbar idx={5} />
-        <div className="w-96 h-full absolute top-[-100px] right-[0px] z-0 bg-[url('/assets/spiralexhibitors2.svg')] bg-cover" />
+        <div className="w-96 h-full absolute top-[-100px] right-[0px] z-0 bg-[url('./assets/spiralexhibitors2.svg')] bg-cover" />
         <div className="w-full h-full flex flex-col px-10 lg:px-24 mb-[100px] lg:mb-[120px]">
           <img
             src="/assets/radial.svg"
@@ -147,7 +147,7 @@ export default function Exhibitors() {
                   liked={row.liked}
                   likes={row.like_count}
                   id={row.id}
-                  onClick={() => navigate("/exhibitors-posters/" + row.id)}
+                  onClickButton={() => navigate("/exhibitors-posters/" + row.id)}
                 />
               ))}
             </div>

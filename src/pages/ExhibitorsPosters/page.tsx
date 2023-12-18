@@ -65,7 +65,7 @@ export default function ExhibitorsPosters() {
     <>
       <LayoutAuth title={"Prima ITB 2023"} needAuth={true}>
         <Navbar idx={5} />
-        <div className="w-96 h-full absolute top-[-100px] right-[0px] bg-[url('/assets/spiralexhibitors2.svg')] bg-cover -z-10"/>
+        <div className="w-96 h-full absolute top-[-100px] right-[0px] bg-[url('./assets/spiralexhibitors2.svg')] bg-cover -z-10"/>
         <div className="w-full h-full flex flex-col px-10 lg:px-24 mb-[100px] lg:mb-[120px] relative">
         <img
             src="/assets/radial.svg"

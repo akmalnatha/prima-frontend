@@ -3,34 +3,30 @@ import Button from "../../components/button";
 import Card from "../../components/card";
 import Footer from "../../components/footer";
 import Navbar from "../../components/navbar";
-import SearchBar from "../../components/searchbar";
+// import SearchBar from "../../components/searchbar";
 import LayoutAuth from "../../layout/LayoutAuth";
-import { useState, useEffect } from "react";
-import { getMostLiked, websiteUrl } from "../../api/api";
+// import { useState, useEffect } from "react";
+// import { getMostLiked, websiteUrl } from "../../api/api";
 
 export default function NonVirtual() {
   const navigate = useNavigate();
-  const [search, setSearch] = useState<string>("");
-  const [pameranYear, setPameranYear] = useState<any>(null);
-  const [mostPameran, setMostPameran] = useState<any>(null);
-  const [deptYear, setDeptYear] = useState<any>(null);
-  const [mostDept, setMostDept] = useState<any>(null);
-  useEffect(() => {
-    getMostLiked()
-      .then((res) => {
-        setPameranYear(new Date(res.data.research.created_at).getFullYear());
-        setDeptYear(new Date(res.data.department.created_at).getFullYear());
-        setMostPameran(res.data.research);
-        setMostDept(res.data.department);
-      })
-      .catch((e) => {
-        console.log(e)
-      });
-  }, []);
+  // const [search, setSearch] = useState<string>("");
+  // const [mostPameran, setMostPameran] = useState<any>(null);
+  // const [mostDept, setMostDept] = useState<any>(null);
+  // useEffect(() => {
+  //   getMostLiked()
+  //     .then((res) => {
+  //       setMostPameran(res.data.research);
+  //       setMostDept(res.data.department);
+  //     })
+  //     .catch((e) => {
+  //       console.log(e)
+  //     });
+  // }, []);
 
-  const searchHandler = () => {
-    window.location.replace("/exhibitor-gallery/researches?search=" + search);
-  };
+  // const searchHandler = () => {
+  //   window.location.replace("/exhibitor-gallery/researches?search=" + search);
+  // };
   return (
     <>
       <LayoutAuth title={"Prima ITB 2023"} needAuth={true}>
@@ -106,7 +102,7 @@ export default function NonVirtual() {
               Most Liked
             </p>
             <div className="mt-10 lg:mt-16 grid grid-rows-2 grid-cols-1 lg:grid-cols-2 lg:grid-rows-1 gap-x-7 gap-y-16 justify-items-center mx-auto">
-              {mostDept != null ? (
+              {/* {mostDept != null ? (
                 <Card
                   tipe={"most liked"}
                   nama={mostDept.name}
@@ -123,9 +119,9 @@ export default function NonVirtual() {
                   subTipe="departemen"
                   id=""
                 />
-              )}
-              {mostPameran != null ? (
-                <Card
+                )}
+                {mostPameran != null ? (
+                  <Card
                   tipe={"most liked"}
                   nama={mostPameran.title}
                   subTipe="content"
@@ -135,18 +131,30 @@ export default function NonVirtual() {
                     navigate(
                       "/detail/"+
                         mostPameran.id
-                    )
+                        )
                   }
                   id=""
-                />
-              ) : (
+                  />
+                  ) : (
                 <Card
                   tipe={"most liked"}
                   nama={"Data tidak ditemukan"}
                   subTipe="content"
                   id=""
                 />
-              )}
+              )} */}
+              <Card
+                tipe={"most liked"}
+                nama={"To Be Announced"}
+                subTipe="departemen"
+                id=""
+              />
+              <Card
+                tipe={"most liked"}
+                nama={"To Be Announced"}
+                subTipe="content"
+                id=""
+              />
             </div>
           </div>
         </div>

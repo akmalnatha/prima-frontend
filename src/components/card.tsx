@@ -11,6 +11,7 @@ const Card = ({
   likes = 0,
   link,
   onClick,
+  onClickButton,
   id,
   liked
 }: {
@@ -20,6 +21,7 @@ const Card = ({
   likes?: number;
   link?: string;
   onClick?: MouseEventHandler<HTMLDivElement> | undefined;
+  onClickButton?: MouseEventHandler<HTMLButtonElement> | undefined;
   id: string;
   liked?: boolean
 }) => {
@@ -65,8 +67,8 @@ const Card = ({
       )}
       {tipe == "exhibitors" && (
         <div
-          className="w-full max-w-[506px] h-full bg-white hover:bg-mono-light_grey rounded-[25px] card-shadow pb-6 cursor-pointer"
-          onClick={onClick}
+          className="w-full max-w-[506px] h-full bg-white rounded-[25px] card-shadow pb-6 cursor-pointer"
+          
         >
           <div className="w-full h-full flex flex-col items-center justify-between gap-4">
             <div className="w-full h-fit flex flex-col items-center gap-4">
@@ -79,8 +81,8 @@ const Card = ({
                 {nama}
               </p>
             </div>
-              <div className="flex justify-between items-center w-full px-6">
-                <Button type={"button"} color="primary" icon iconPosition="right" size="small" text="See Posters"/>
+              <div className="flex justify-between items-center w-full px-6 z-10">
+                <Button type={"button"} color="primary" icon iconPosition="right" size="small" text="See Posters" onClick={onClickButton}/>
                 <div className={`flex flex-col ${likedPost ? "text-purple-primary" : "text-black"} hover:text-blue-light active:text-blue-primary text-3xl items-center`} onClick={() => handleLikePost()}>
                   {likedPost ? <BiSolidLike/> : <BiLike/>}
                   <p className="text-xs">{totalLikes} Likes</p>

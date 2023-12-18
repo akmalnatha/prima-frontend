@@ -86,14 +86,14 @@ function Navbar({ idx }: { idx: number }) {
               >
                 Home
               </NavLink>
-              <NavLink
-                to="/virtual"
+              <a
+                href="https://app.lapentor.com/sphere/prima-2023-pameran-riset-inovasi-pengabdian-masyarakat"
                 className={`${
                   idx == 1 ? "font-bold" : "font-medium"
                 } text-[16px] md:text-[20px] hover:font-bold`}
               >
-                3D Virtual Gallery 2022
-              </NavLink>
+                3D Virtual Gallery 2023
+              </a>
               <div
                 onClick={() => setArsip(!arsip)}
                 className={`${
@@ -109,10 +109,10 @@ function Navbar({ idx }: { idx: number }) {
                     id="dropdown"
                     className="absolute flex w-fit mt-40 flex-col bg-white shadow-lg bg-opacity-75 rounded-xl"
                   >
-                    <NavLink className="py-4 px-6 text-[16px] md:text-[20px] font-normal hover:font-bold hover:bg-gray-300 rounded-t-xl" to={"/non-virtual/2022"}>
+                    <NavLink className="py-4 px-6 text-[16px] md:text-[20px] font-normal hover:font-bold hover:bg-gray-300 rounded-t-xl" to={"/exhibitors/2022"}>
                       Gallery 2022
                     </NavLink>
-                    <NavLink className="py-4 px-6 text-[16px] md:text-[20px] font-normal hover:font-bold hover:bg-gray-300 rounded-b-xl" to={"/non-virtual/2021"}>
+                    <NavLink className="py-4 px-6 text-[16px] md:text-[20px] font-normal hover:font-bold hover:bg-gray-300 rounded-b-xl" to={"/exhibitors/2021"}>
                       Gallery 2021
                     </NavLink>
                   </div>
