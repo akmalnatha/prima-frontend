@@ -12,7 +12,7 @@ import About from "./pages/Aboutus/page";
 import Exhibitors from "./pages/Exhibitors/page";
 import PosterDetail from "./pages/PosterDetail/page";
 import ExhibitorsPosters from "./pages/ExhibitorsPosters/page";
-import NonVirtual from "./pages/NonVirtual/page";
+// import NonVirtual from "./pages/NonVirtual/page";
 
 const router = createBrowserRouter([{ path: "*", Component: Root }]);
 
@@ -25,7 +25,7 @@ function Root() {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/virtual" element={<Virtual />} />
-      <Route path="/non-virtual/:year" element={<NonVirtual />} />
+      {/* <Route path="/non-virtual/:year" element={<NonVirtual />} /> */}
       {/* <Route path="/arsip/:year" element={<Arsip />} /> */}
       <Route path="/aboutus" element={<About />} />
       <Route path="/exhibitors/:year" element={<Exhibitors />} />

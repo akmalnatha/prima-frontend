@@ -5,6 +5,7 @@ import "./card.css"
 import { likeDepartments } from "../api/api";
 
 const Card = ({
+  fit = false,
   tipe = "most liked",
   subTipe,
   nama,
@@ -16,6 +17,7 @@ const Card = ({
   id,
   liked
 }: {
+  fit?: boolean;
   tipe: "exhibitors" | "most liked" | "posters";
   subTipe?: "departemen" | "content";
   nama: string;
@@ -43,7 +45,7 @@ const Card = ({
     <>
       {tipe == "most liked" && (
         <div
-          className="w-full max-w-[568px] h-full bg-white hover:bg-mono-light_grey rounded-[25px] card-shadow pb-4 cursor-pointer"
+          className={`w-full max-w-[568px] ${fit ? "h-fit" : "h-full"} bg-white hover:bg-mono-light_grey rounded-[25px] card-shadow pb-4 cursor-pointer`}
           onClick={onClick}
         >
           <div className="w-full h-full flex flex-col items-center justify-between gap-4">
@@ -69,7 +71,7 @@ const Card = ({
       )}
       {tipe == "exhibitors" && (
         <div
-          className="w-full max-w-[506px] h-full bg-white rounded-[25px] card-shadow pb-6 cursor-pointer"
+          className={`w-full max-w-[506px] ${fit ? "h-fit" : "h-full"} bg-white rounded-[25px] card-shadow pb-6 cursor-pointer`}
           
         >
           <div className="w-full h-full flex flex-col items-center justify-between gap-4">
@@ -95,7 +97,7 @@ const Card = ({
       )}
       {tipe == "posters" && (
         <div
-          className="w-full max-w-[506px] h-full bg-white hover:bg-mono-light_grey rounded-[25px] card-shadow cursor-pointer"
+          className={`w-full max-w-[506px] ${fit ? "h-fit" : "h-full"} bg-white hover:bg-mono-light_grey rounded-[25px] card-shadow cursor-pointer`}
           onClick={onClick}
         >
           <div className="w-full h-fit flex flex-col p-4 pb-6 items-center justify-between gap-4">

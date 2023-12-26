@@ -30,6 +30,8 @@ const SearchBar = ({
           <input
             id="search"
             type="text"
+            autoComplete="false"
+            name="hidden"
             required={required}
             placeholder={placeholder}
             onChange={onChange}

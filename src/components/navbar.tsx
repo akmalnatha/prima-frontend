@@ -100,7 +100,7 @@ function Navbar({ idx }: { idx: number }) {
                 {walkthrough && (
                   <div
                     id="dropdown"
-                    className="absolute flex w-fit mt-56 flex-col bg-white shadow-lg bg-opacity-75 rounded-xl"
+                    className="absolute flex w-fit mt-[284px] flex-col bg-white shadow-lg bg-opacity-75 rounded-xl"
                   >
                     <a className="py-4 px-6 text-[16px] md:text-[20px] font-normal hover:font-bold hover:bg-gray-300 rounded-t-xl" href={"https://app.lapentor.com/sphere/prima-2023-pameran-riset-inovasi-pengabdian-masyarakat"}>
                       Virtual Walkthrough 2023
@@ -108,7 +108,10 @@ function Navbar({ idx }: { idx: number }) {
                     <a className="py-4 px-6 text-[16px] md:text-[20px] font-normal hover:font-bold hover:bg-gray-300" href={"https://app.lapentor.com/sphere/prima-itb-2022-pameran-virtual-riset-inovasi-dan-pengabdian-masyarakat-1671177505"}>
                       Virtual Walkthrough 2022
                     </a>
-                    <a className="py-4 px-6 text-[16px] md:text-[20px] font-normal hover:font-bold hover:bg-gray-300 rounded-b-xl" href={"/exhibitors/2021"}>
+                    <a className="py-4 px-6 text-[16px] md:text-[20px] font-normal hover:font-bold hover:bg-gray-300 rounded-b-xl" href={"https://app.lapentor.com/sphere/prima-itb-2021-pameran-riset-inovasi-pengabdian-masyarakat?scene=641c7e7fcb6d40f9bf07f037"}>
+                      Virtual Walkthrough 2021
+                    </a>
+                    <a className="py-4 px-6 text-[16px] md:text-[20px] font-normal hover:font-bold hover:bg-gray-300 rounded-b-xl" href={"https://app.lapentor.com/sphere/prima-2020-pameran-riset-inovasi-pengabdian-masyarakat?scene=644e7c67795a60b0e70699c3"}>
                       Virtual Walkthrough 2021
                     </a>
                   </div>
