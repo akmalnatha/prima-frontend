@@ -112,7 +112,7 @@ function Navbar({ idx }: { idx: number }) {
                       Virtual Walkthrough 2021
                     </a>
                     <a className="py-4 px-6 text-[16px] md:text-[20px] font-normal hover:font-bold hover:bg-gray-300 rounded-b-xl" href={"https://app.lapentor.com/sphere/prima-2020-pameran-riset-inovasi-pengabdian-masyarakat?scene=644e7c67795a60b0e70699c3"}>
-                      Virtual Walkthrough 2021
+                      Virtual Walkthrough 2020
                     </a>
                   </div>
                 )}
