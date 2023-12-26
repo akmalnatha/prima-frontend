@@ -70,7 +70,7 @@ export default function Home() {
               color="primary"
               text="Virtual Gallery"
               fitContent={false}
-              onClick={() => navigate("/non-virtual/2023")}
+              onClick={() => navigate("/exhibitors/2023")}
             />
           </div>
           <div className="mt-10 lg:mt-14 w-[72%] h-fit mx-auto border-[10px] border-blue-dark mb-[240px]">
