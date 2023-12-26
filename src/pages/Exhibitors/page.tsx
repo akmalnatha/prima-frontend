@@ -7,61 +7,157 @@ import Paginate from "../../components/paginate";
 import SearchBar from "../../components/searchbar";
 import LayoutAuth from "../../layout/LayoutAuth";
 import { useNavigate, useParams } from "react-router";
-import { getDepartments, searchDepartment } from "../../api/api";
+import { getAllResearch, getDepartments, searchDepartment, websiteUrl } from "../../api/api";
 
 export default function Exhibitors() {
   const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [current, setCurrent] = useState(1);
-  const [departmentData, setDepartmentData] = useState([]);
+  const [departmentData, setDepartmentData] = useState<any[]>([]);
+  const [riset, setRiset] = useState<any[]>([]);
+  const [banyakRiset, setBanyakRiset] = useState(0);
+  const [data, setData] = useState<any[]>([]);
+  const [filteredData, setFilteredData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const params = useParams();
 
+  let updatedRiset:any[] = []
+
+  const fetchData = async (input: string, currentOffset: number) => {
+    try {
+      if(params && params.year && input != ''){
+        setIsLoading(true)
+        const res = await getAllResearch(input, currentOffset);
+        if (res && res.length > 0) {
+          if(updatedRiset.length >0 && (updatedRiset[updatedRiset.length - 1].id != res[res.length - 1].id)){
+            updatedRiset = updatedRiset.concat(res);
+          }
+          else if(updatedRiset.length==0){
+            updatedRiset = updatedRiset.concat(res);
+          }
+          await fetchData(input ,currentOffset + 1); 
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      const filteredRiset = updatedRiset.filter((item: any) => {
+        const createdAtYear = new Date(item.created_at).getFullYear();
+        if (params && params.year && typeof params.year === "string") {
+          return createdAtYear === parseInt(params.year, 10);
+        }
+        return false;
+      });
+      setRiset(filteredRiset)
+      if (riset.length > banyakRiset) {
+        setBanyakRiset(riset.length);
+      } 
+      setIsLoading(false);
+      return filteredRiset
+    }
+  };
+
+  // useEffect(() => {
+  //   const fetchDataWrapper = async () => {
+  //     await fetchData(0);
+  //   };
+  //   fetchDataWrapper();
+  // }, [search]);
+  
   useEffect(() => {
     setIsLoading(true);
     const data = getDepartments();
     data
       .then((res) => {
-        const filteredData = res.filter((item: any) => {
+        const filteredDepartment = res.filter((item: any) => {
           const createdAtYear = new Date(item.created_at).getFullYear();
           if (params && params.year && typeof params.year === "string") {
             return createdAtYear === parseInt(params.year, 10);
           }
           return false;
         });
-        setDepartmentData(filteredData);
+        const department = filteredDepartment.map((item: any) => ({
+          ...item,
+          type: "department", // Add a type property
+        }));
+        console.log(department)
+        setDepartmentData(department);
+        setFilteredData(department);
       })
       .finally(() => {
         setIsLoading(false);
       });
   }, []);
+  
+  // useEffect(() => {
+  //   let newData = [...departmentData, ...riset];
+  //   setData(newData);
+  //   if(riset){
+  //     setFilteredData(newData)
+  //   } else {
+  //     setFilteredData(departmentData);
+  //   }
+  // },[departmentData, riset])
+  
+  // const searchHandler = (e: string) => {
+  //   if (params && params.year) {
+  //     setIsLoading(true);
+  //     const hasilSearch = searchDepartment(e);
+  //     hasilSearch
+  //     .then((res) => {
+  //       const filteredData = res.filter((item: any) => {
+  //         const createdAtYear = new Date(item.created_at).getFullYear();
+  //         if (params && params.year && typeof params.year === "string") {
+  //           return createdAtYear === parseInt(params.year, 10);
+  //         }
+  //         return false;
+  //       });
+  //         setDepartmentData(filteredData);
+  //       })
+  //       .finally(() => {
+  //         setIsLoading(false);
+  //       });
+  //   }
+  // };
 
-  const searchHandler = (e: string) => {
-    if (params && params.year) {
-      setIsLoading(true);
-      const hasilSearch = searchDepartment(e);
-      hasilSearch
-      .then((res) => {
-        const filteredData = res.filter((item: any) => {
-          const createdAtYear = new Date(item.created_at).getFullYear();
-          if (params && params.year && typeof params.year === "string") {
-            return createdAtYear === parseInt(params.year, 10);
-          }
-          return false;
-        });
-          setDepartmentData(filteredData);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
+  const searchHandler = async (search: string) => {
+    setIsLoading(true)
+    if (search != undefined && search != "") {
+      const risetData = await fetchData(search, 0);
+      setIsLoading(true)
+      let newData = [
+        ...departmentData.map((item) => ({ ...item })),
+        ...risetData.map((item) => ({ ...item, type: "riset" })),
+      ];
+      setData(newData);
+      const filtered = newData.filter((item: any) =>
+        Object.values(item).some((value: any) =>
+          String(value).toLowerCase().includes(search.toLowerCase())
+        )
+      );
+      setFilteredData(filtered);
+    } else {
+      setFilteredData(departmentData)
     }
+    setIsLoading(false)
+    // if (params && params.id) {
+    //   setIsLoading(true);
+    //   const hasilSearch = searchResearch(params.id, e);
+    //   hasilSearch
+    //     .then((res) => {
+    //       setRiset(res.research);
+    //     })
+    //     .finally(() => {
+    //       setIsLoading(false);
+    //     });
+    // }
   };
 
   const indexOfLastItem = current * 9;
   const indexOfFirstItem = indexOfLastItem - 9;
-  const currentItems = departmentData.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = (departmentData.length == 9 ? 0 : 1) + Math.floor(departmentData.length / 9)
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = (filteredData.length == 9 ? 0 : 1) + Math.floor(filteredData.length / 9)
   if(current > totalPages){
     setCurrent(1)
   }
@@ -70,7 +166,6 @@ export default function Exhibitors() {
     <>
       <LayoutAuth title={"Prima ITB 2023"} needAuth={true}>
         <Navbar idx={5} />
-        {/* <div className="w-96 h-full absolute top-[-100px] right-[0px] z-0 bg-[url('./assets/spiralexhibitors2.svg')] bg-cover" /> */}
         <div className="w-full h-fit min-h-screen overflow-hidden flex flex-col px-10 lg:px-24 pb-[100px] lg:pb-[120px] relative">
           <img src="/assets/spiralexhibitors2.svg" alt="" className="w-96 absolute top-[-100px] right-[0px] object-cover -z-10"/>
           <img
@@ -100,7 +195,7 @@ export default function Exhibitors() {
             Exhibitors
           </p>
           <p className="mt-3 font-medium text-[10px] lg:text-[28px] text-center z-40">
-            Pameran Riset, Inovasi, dan Pengabdian Masyarakat (Virtual)
+            Pameran Riset, Inovasi, dan Pengabdian Masyarakat (Non-Virtual)
           </p>
           <div className="mt-10 lg:mt-16 w-full flex justify-center lg:justify-between items-center">
             <div className="hidden lg:block z-40">
@@ -108,10 +203,10 @@ export default function Exhibitors() {
                 type={"button"}
                 icon={true}
                 iconPosition="left"
-                text="Back to Exhibitor Gallery"
+                text="Back to Home"
                 color="secondary"
                 size="medium"
-                onClick={() => navigate("/non-virtual/2023")}
+                onClick={() => navigate(-1)}
               />
             </div>
             <div className="w-full lg:w-1/2">
@@ -141,7 +236,10 @@ export default function Exhibitors() {
           ) : (
             <div className="z-40 mt-10 lg:mt-14 w-full grid justify-items-center grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14">
               {currentItems.map((row: any) => (
+                row.type == "department" ?
                 <Card
+                  fit
+                  key={row.id}
                   tipe={"exhibitors"}
                   nama={row.name}
                   link={`https://prima.itb.ac.id/adminpanel/${row.picture}`}
@@ -149,6 +247,16 @@ export default function Exhibitors() {
                   likes={row.like_count}
                   id={row.id}
                   onClickButton={() => navigate("/exhibitors-posters/" + row.id)}
+                />
+                :
+                <Card
+                  key={row.id}
+                  tipe={"posters"}
+                  nama={row.title}
+                  penulis={row.authors}
+                  link={websiteUrl + "/" + row.picture_compressed}
+                  id={""}
+                  onClick={() => navigate("/detail/"+row.id)}
                 />
               ))}
             </div>

@@ -7,7 +7,7 @@ import Paginate from "../../components/paginate";
 import SearchBar from "../../components/searchbar";
 import LayoutAuth from "../../layout/LayoutAuth";
 import { useNavigate, useParams } from "react-router-dom";
-import { getDepartmentByID, searchResearch, websiteUrl } from "../../api/api";
+import { getDepartmentByID, websiteUrl } from "../../api/api";
 
 export default function ExhibitorsPosters() {
   const [search, setSearch] = useState("");
@@ -17,6 +17,7 @@ export default function ExhibitorsPosters() {
   const [namaDepartemen, setNamaDepartemen] = useState("");
   const [banyakRiset, setBanyakRiset] = useState(0);
   const [riset, setRiset] = useState<any[]>([]);
+  const [filteredRiset, setFilteredRiset] = useState<any[]>([]);
   const navigate = useNavigate();
 
   let updatedRiset:any[] = []
@@ -61,6 +62,7 @@ export default function ExhibitorsPosters() {
       console.error('Error fetching data:', error);
     } finally {
       setRiset(updatedRiset)
+      setFilteredRiset(updatedRiset)
       if (riset.length > banyakRiset) {
         setBanyakRiset(riset.length);
       } 
@@ -103,23 +105,35 @@ export default function ExhibitorsPosters() {
   // }, []);
 
   const searchHandler = (e: string) => {
-    if (params && params.id) {
-      setIsLoading(true);
-      const hasilSearch = searchResearch(params.id, e);
-      hasilSearch
-        .then((res) => {
-          setRiset(res.research);
-        })
-        .finally(() => {
-          setIsLoading(false);
-        });
+    if (e != undefined && e != "") {
+      const filtered = riset.filter((item: any) =>
+        Object.values(item).some((value: any) =>
+          String(value).toLowerCase().includes(e.toLowerCase())
+        )
+      );
+      setFilteredRiset(
+        filtered
+      );
+    } else {
+      setFilteredRiset(riset)
     }
+    // if (params && params.id) {
+    //   setIsLoading(true);
+    //   const hasilSearch = searchResearch(params.id, e);
+    //   hasilSearch
+    //     .then((res) => {
+    //       setRiset(res.research);
+    //     })
+    //     .finally(() => {
+    //       setIsLoading(false);
+    //     });
+    // }
   };
 
   const indexOfLastItem = current * 9;
   const indexOfFirstItem = indexOfLastItem - 9;
-  const currentItems = riset.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = (riset.length == 9 ? 0 : 1) + Math.floor(riset.length / 9)
+  const currentItems = filteredRiset.slice(indexOfFirstItem, indexOfLastItem);
+  const totalPages = (filteredRiset.length == 9 ? 0 : 1) + Math.floor(filteredRiset.length / 9)
   if(current > totalPages){
     setCurrent(1)
   }
