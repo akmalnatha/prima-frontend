@@ -55,7 +55,7 @@ export default function PosterDetail() {
         <Navbar idx={5} />
         <div className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] absolute top-[0px] right-[0px] z-0 bg-[url('./assets/spiraldetail.svg')] bg-cover" />
         <div className="w-[300px] h-[600px] md:w-[600px] md:h-[1000px] lg:w-[1000px] lg:h-[1200px] absolute top-[550px] md:top-[800px] lg:top-[1000px] xl:top-[1400px] right-[0px] -z-10 bg-[url('./assets/spiraldetail3.svg')] bg-cover" />
-        <div className="w-full h-full flex flex-col px-10 lg:px-24 mb-[100px] lg:mb-[180px]">
+        <div className="w-full h-full flex flex-col px-10 lg:px-24 pb-[100px] lg:pb-[180px] relative overflow-hidden">
           <img
             src="/assets/spiraldetail2.svg"
             alt=""
@@ -74,12 +74,12 @@ export default function PosterDetail() {
           <img
             src="/assets/spiraldetail4.svg"
             alt=""
-            className="w-[700px] h-[700px] absolute top-[1000px] lg:top-[1400px] xl:top-[2000px] left-[-200px] -z-10 hidden md:block"
+            className="w-[700px] h-[700px] absolute top-[800px] lg:top-[1200px] xl:top-[1800px] left-[-200px] -z-10 hidden md:block"
           />
           <img
             src="/assets/radial.svg"
             alt=""
-            className="absolute top-[1000px] lg:top-[1500px] xl:top-[2100px] left-[0px] z-0 hidden md:block"
+            className="absolute top-[800px] lg:top-[1300px] xl:top-[1900px] left-[0px] z-0 hidden md:block"
           />
           <p className="mt-[96px] lg:mt-[160px] font-semibold text-[16px] lg:text-[36px] text-center">
             {risetData.title}

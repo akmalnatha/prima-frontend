@@ -142,26 +142,55 @@ export default function ExhibitorsPosters() {
       <LayoutAuth title={"Prima ITB 2023"} needAuth={true}>
         <Navbar idx={5} />
         <div className="w-full h-fit min-h-screen overflow-hidden flex flex-col px-10 lg:px-24 pb-[100px] lg:pb-[120px] relative">
-        <img src="/assets/spiralexhibitors2.svg" alt="" className="w-96 absolute top-[-100px] right-[0px] object-cover -z-10"/>
-        <img
+          <img
+            src="/assets/spiralexhibitors2.svg"
+            alt=""
+            className="hidden lg:block w-96 absolute top-[-100px] right-[0px] object-cover -z-10"
+          />
+          <img
+            src="/assets/spiralexhibitors2-mobile.svg"
+            alt=""
+            className="lg:hidden w-96 absolute top-[-50px] -left-[100px] object-cover -z-10 w-[64%] sm:w-[57%] md:w-[50%] object-contain"
+          />
+          <img
+            src="/assets/radial2.svg"
+            alt=""
+            className="lg:hidden absolute -top-[360px] sm:-top-[500px] md:-top-[600px] left-[-200px] sm:left-[-300px] md:left-[-400px] -z-10"
+          />
+          <img
             src="/assets/radial.svg"
             alt=""
-            className="absolute top-[-10px] left-[-100px] -z-10"
+            className="absolute top-[840px] lg:top-[120px] left-[-100px] -z-10"
           />
           <img
             src="/assets/spiralexhibitors.svg"
             alt=""
-            className="absolute -top-[200px] -left-[10px] -z-10"
+            className="absolute top-[700px] lg:top-[-50px] -left-[10px] -z-10 w-[40%] lg:w-[20%] object-contain"
+          />
+          <img
+            src="/assets/radial2.svg"
+            alt=""
+            className="lg:hidden absolute top-[1000px] right-[-300px] sm:right-[-500px] md:right-[-600px] -z-10"
           />
           <img
             src="/assets/spiralexhibitors3.svg"
             alt=""
-            className="absolute top-[600px] -left-[0px] -z-10"
+            className="absolute top-[1600px] lg:top-[600px] -left-[0px] -z-10"
           />
           <img
-            src="/assets/radial.svg"
+            src="/assets/radial2.svg"
             alt=""
-            className="absolute top-[800px] left-[-100px] -z-10"
+            className="absolute bottom-[25%] lg:-bottom-[880px] right-[-300px] sm:right-[-500px] md:right-[-500px] lg:left-[-400px] -z-10"
+          />
+          <img
+            src="/assets/spiralexhibitors5.svg"
+            alt=""
+            className="absolute bottom-[32%] lg:-bottom-[120px] right-0 w-[30%] lg:w-[25%] -z-10"
+          />
+          <img
+            src="/assets/spiralexhibitors6.svg"
+            alt=""
+            className="lg:hidden absolute -bottom-[200px] sm:-bottom-[300px] md:-bottom-[400px] w-full object-contain left-0 -z-10"
           />
           <p className="mt-[96px] lg:mt-[160px] font-bold text-[28px] lg:text-[60px] text-center">
             PRIMA ITB {params.year}

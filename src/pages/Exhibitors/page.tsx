@@ -7,7 +7,7 @@ import Paginate from "../../components/paginate";
 import SearchBar from "../../components/searchbar";
 import LayoutAuth from "../../layout/LayoutAuth";
 import { useNavigate, useParams } from "react-router";
-import { getAllResearch, getDepartments, searchDepartment, websiteUrl } from "../../api/api";
+import { getAllResearch, getDepartments, websiteUrl } from "../../api/api";
 
 export default function Exhibitors() {
   const navigate = useNavigate();
@@ -16,31 +16,32 @@ export default function Exhibitors() {
   const [departmentData, setDepartmentData] = useState<any[]>([]);
   const [riset, setRiset] = useState<any[]>([]);
   const [banyakRiset, setBanyakRiset] = useState(0);
-  const [data, setData] = useState<any[]>([]);
   const [filteredData, setFilteredData] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const params = useParams();
 
-  let updatedRiset:any[] = []
+  let updatedRiset: any[] = [];
 
   const fetchData = async (input: string, currentOffset: number) => {
     try {
-      if(params && params.year && input != ''){
-        setIsLoading(true)
+      if (params && params.year && input != "") {
+        setIsLoading(true);
         const res = await getAllResearch(input, currentOffset);
         if (res && res.length > 0) {
-          if(updatedRiset.length >0 && (updatedRiset[updatedRiset.length - 1].id != res[res.length - 1].id)){
+          if (
+            updatedRiset.length > 0 &&
+            updatedRiset[updatedRiset.length - 1].id != res[res.length - 1].id
+          ) {
+            updatedRiset = updatedRiset.concat(res);
+          } else if (updatedRiset.length == 0) {
             updatedRiset = updatedRiset.concat(res);
           }
-          else if(updatedRiset.length==0){
-            updatedRiset = updatedRiset.concat(res);
-          }
-          await fetchData(input ,currentOffset + 1); 
+          await fetchData(input, currentOffset + 1);
         }
       }
     } catch (error) {
-      console.error('Error fetching data:', error);
+      console.error("Error fetching data:", error);
     } finally {
       const filteredRiset = updatedRiset.filter((item: any) => {
         const createdAtYear = new Date(item.created_at).getFullYear();
@@ -49,12 +50,12 @@ export default function Exhibitors() {
         }
         return false;
       });
-      setRiset(filteredRiset)
+      setRiset(filteredRiset);
       if (riset.length > banyakRiset) {
         setBanyakRiset(riset.length);
-      } 
+      }
       setIsLoading(false);
-      return filteredRiset
+      return filteredRiset;
     }
   };
 
@@ -64,7 +65,7 @@ export default function Exhibitors() {
   //   };
   //   fetchDataWrapper();
   // }, [search]);
-  
+
   useEffect(() => {
     setIsLoading(true);
     const data = getDepartments();
@@ -81,7 +82,7 @@ export default function Exhibitors() {
           ...item,
           type: "department", // Add a type property
         }));
-        console.log(department)
+        console.log(department);
         setDepartmentData(department);
         setFilteredData(department);
       })
@@ -89,7 +90,7 @@ export default function Exhibitors() {
         setIsLoading(false);
       });
   }, []);
-  
+
   // useEffect(() => {
   //   let newData = [...departmentData, ...riset];
   //   setData(newData);
@@ -99,7 +100,7 @@ export default function Exhibitors() {
   //     setFilteredData(departmentData);
   //   }
   // },[departmentData, riset])
-  
+
   // const searchHandler = (e: string) => {
   //   if (params && params.year) {
   //     setIsLoading(true);
@@ -122,15 +123,14 @@ export default function Exhibitors() {
   // };
 
   const searchHandler = async (search: string) => {
-    setIsLoading(true)
+    setIsLoading(true);
     if (search != undefined && search != "") {
       const risetData = await fetchData(search, 0);
-      setIsLoading(true)
+      setIsLoading(true);
       let newData = [
         ...departmentData.map((item) => ({ ...item })),
         ...risetData.map((item) => ({ ...item, type: "riset" })),
       ];
-      setData(newData);
       const filtered = newData.filter((item: any) =>
         Object.values(item).some((value: any) =>
           String(value).toLowerCase().includes(search.toLowerCase())
@@ -138,9 +138,9 @@ export default function Exhibitors() {
       );
       setFilteredData(filtered);
     } else {
-      setFilteredData(departmentData)
+      setFilteredData(departmentData);
     }
-    setIsLoading(false)
+    setIsLoading(false);
     // if (params && params.id) {
     //   setIsLoading(true);
     //   const hasilSearch = searchResearch(params.id, e);
@@ -157,9 +157,10 @@ export default function Exhibitors() {
   const indexOfLastItem = current * 9;
   const indexOfFirstItem = indexOfLastItem - 9;
   const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = (filteredData.length == 9 ? 0 : 1) + Math.floor(filteredData.length / 9)
-  if(current > totalPages){
-    setCurrent(1)
+  const totalPages =
+    (filteredData.length == 9 ? 0 : 1) + Math.floor(filteredData.length / 9);
+  if (current > totalPages) {
+    setCurrent(1);
   }
 
   return (
@@ -167,26 +168,55 @@ export default function Exhibitors() {
       <LayoutAuth title={"Prima ITB 2023"} needAuth={true}>
         <Navbar idx={5} />
         <div className="w-full h-fit min-h-screen overflow-hidden flex flex-col px-10 lg:px-24 pb-[100px] lg:pb-[120px] relative">
-          <img src="/assets/spiralexhibitors2.svg" alt="" className="w-96 absolute top-[-100px] right-[0px] object-cover -z-10"/>
+        <img
+            src="/assets/spiralexhibitors2.svg"
+            alt=""
+            className="hidden lg:block w-96 absolute top-[-100px] right-[0px] object-cover -z-10"
+          />
+          <img
+            src="/assets/spiralexhibitors2-mobile.svg"
+            alt=""
+            className="lg:hidden w-96 absolute top-[-50px] -left-[100px] object-cover -z-10 w-[64%] sm:w-[57%] md:w-[50%] object-contain"
+          />
+          <img
+            src="/assets/radial2.svg"
+            alt=""
+            className="lg:hidden absolute -top-[360px] sm:-top-[500px] md:-top-[600px] left-[-200px] sm:left-[-300px] md:left-[-400px] -z-10"
+          />
           <img
             src="/assets/radial.svg"
             alt=""
-            className="absolute top-[-10px] left-[-100px]"
+            className="absolute top-[840px] lg:top-[120px] left-[-100px] -z-10"
           />
           <img
             src="/assets/spiralexhibitors.svg"
             alt=""
-            className="absolute -top-[200px] -left-[10px] z-0"
+            className="absolute top-[700px] lg:top-[-50px] -left-[10px] -z-10 w-[40%] lg:w-[20%] object-contain"
+          />
+          <img
+            src="/assets/radial2.svg"
+            alt=""
+            className="lg:hidden absolute top-[1000px] right-[-300px] sm:right-[-500px] md:right-[-600px] -z-10"
           />
           <img
             src="/assets/spiralexhibitors3.svg"
             alt=""
-            className="absolute top-[600px] -left-[0px] -z-10"
+            className="absolute top-[1600px] lg:top-[600px] -left-[0px] -z-10"
           />
           <img
-            src="/assets/radial.svg"
+            src="/assets/radial2.svg"
             alt=""
-            className="absolute top-[800px] left-[-100px]"
+            className="absolute bottom-[25%] lg:-bottom-[880px] right-[-300px] sm:right-[-500px] md:right-[-500px] lg:left-[-400px] -z-10"
+          />
+          <img
+            src="/assets/spiralexhibitors5.svg"
+            alt=""
+            className="absolute bottom-[32%] lg:-bottom-[120px] right-0 w-[30%] lg:w-[25%] -z-10"
+          />
+          <img
+            src="/assets/spiralexhibitors6.svg"
+            alt=""
+            className="lg:hidden absolute -bottom-[200px] sm:-bottom-[300px] md:-bottom-[400px] w-full object-contain left-0 -z-10"
           />
           <p className="mt-[96px] lg:mt-[160px] font-bold text-[28px] lg:text-[60px] text-center z-40">
             PRIMA ITB {params.year}
@@ -206,11 +236,20 @@ export default function Exhibitors() {
                 text="Back to Home"
                 color="secondary"
                 size="medium"
-                onClick={() => navigate(-1)}
+                onClick={() => navigate("/")}
               />
             </div>
             <div className="w-full lg:w-1/2">
-              <SearchBar placeholder={"Search ..."} onChange={(e) => {setSearch(e.target.value); if(e.target.value == ""){searchHandler("")}}} onClick={() => searchHandler(search)}/>
+              <SearchBar
+                placeholder={"Search ..."}
+                onChange={(e) => {
+                  setSearch(e.target.value);
+                  if (e.target.value == "") {
+                    searchHandler("");
+                  }
+                }}
+                onClick={() => searchHandler(search)}
+              />
             </div>
           </div>
           {isLoading ? (
@@ -235,37 +274,37 @@ export default function Exhibitors() {
             </div>
           ) : (
             <div className="z-40 mt-10 lg:mt-14 w-full grid justify-items-center grid-cols-1 lg:grid-cols-3 gap-10 lg:gap-14">
-              {currentItems.map((row: any) => (
-                row.type == "department" ?
-                <Card
-                  fit
-                  key={row.id}
-                  tipe={"exhibitors"}
-                  nama={row.name}
-                  link={`https://prima.itb.ac.id/adminpanel/${row.picture}`}
-                  liked={row.liked}
-                  likes={row.like_count}
-                  id={row.id}
-                  onClickButton={() => navigate("/exhibitors-posters/" + row.id)}
-                />
-                :
-                <Card
-                  key={row.id}
-                  tipe={"posters"}
-                  nama={row.title}
-                  penulis={row.authors}
-                  link={websiteUrl + "/" + row.picture_compressed}
-                  id={""}
-                  onClick={() => navigate("/detail/"+row.id)}
-                />
-              ))}
+              {currentItems.map((row: any) =>
+                row.type == "department" ? (
+                  <Card
+                    fit={search != "" ? true : false}
+                    key={row.id}
+                    tipe={"exhibitors"}
+                    nama={row.name}
+                    link={`https://prima.itb.ac.id/adminpanel/${row.picture}`}
+                    liked={row.liked}
+                    likes={row.like_count}
+                    id={row.id}
+                    onClickButton={() =>
+                      navigate("/exhibitors-posters/" + row.id)
+                    }
+                  />
+                ) : (
+                  <Card
+                    key={row.id}
+                    tipe={"posters"}
+                    nama={row.title}
+                    penulis={row.authors}
+                    link={websiteUrl + "/" + row.picture_compressed}
+                    id={""}
+                    onClick={() => navigate("/detail/" + row.id)}
+                  />
+                )
+              )}
             </div>
           )}
           <div className="mt-4 w-full flex justify-center z-40">
-            <Paginate
-              totalPages={totalPages}
-              current={(e) => setCurrent(e)}
-            />
+            <Paginate totalPages={totalPages} current={(e) => setCurrent(e)} />
           </div>
         </div>
         <Footer />
